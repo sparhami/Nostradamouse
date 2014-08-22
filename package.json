@@ -1,0 +1,13 @@
+{
+    "name": "Nostradamouse",
+    "version": "0.1.0",
+    "devDependencies": {
+        "grunt": "*",
+        "grunt-karma": "*",
+        "karma": "*",
+        "karma-mocha": "*",
+        "karma-chai-sinon": "*",
+        "karma-firefox-launcher": "*",
+        "karma-chrome-launcher": "*"
+    }
+}
