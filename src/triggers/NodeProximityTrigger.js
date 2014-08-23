@@ -2,8 +2,6 @@
 
     var NodeProximityTrigger = function(loader) {
         this.loader = loader;
-
-        return this.addTrigger.bind(this);
     };
 
     NodeProximityTrigger.prototype = {

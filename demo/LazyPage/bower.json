@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "paper-button": "Polymer/paper-button#~0.3.5",
-    "paper-dialog": "Polymer/paper-dialog#~0.3.5"
+    "paper-dialog": "Polymer/paper-dialog#~0.3.5",
+    "paper-toast": "polymer/paper-toast#~0.3.5"
   }
 }

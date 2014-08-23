@@ -2,19 +2,13 @@
     var Utils = scope.Utils;
 
     var DelegatedEventHandler = function(evtName, loader) {
-        return DelegatedEventHandler.prototype.constructor(evtName, loader);
+        this.evtName = evtName;
+        this.loader = loader;
+        this.triggers = [];
+        this.eventAttached = false;
     };
 
     DelegatedEventHandler.prototype = {
-        constructor: function(evtName, loader) {
-            this.evtName = evtName;
-            this.loader = loader;
-            this.triggers = [];
-            this.eventAttached = false;
-
-            return this.addTrigger.bind(this);
-        },
-
         setupListener: function() {
             if(!!this.triggers.length === !this.eventAttached) {
                 window[this.eventAttached ? 'removeEventListener' : 'addEventListener'](this.evtName, this, true);
@@ -31,7 +25,7 @@
                 }, this)
                 .reduce(function(p, c) {
                     return p.concat(c);
-                });
+                }, []);
         },
 
         handleEvent: function(e) {

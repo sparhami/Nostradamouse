@@ -3,9 +3,9 @@
 
     var loader = new scope.Loader();
 
-    var ClickTrigger = scope.DelegatedEventHandler('click', loader);
-    var FocusTrigger = scope.DelegatedEventHandler('focus', loader);
-    var MouseOverTrigger = scope.DelegatedEventHandler('mouseover', loader);
+    var ClickTrigger = new scope.DelegatedEventHandler('click', loader);
+    var FocusTrigger = new scope.DelegatedEventHandler('focus', loader);
+    var MouseOverTrigger = new scope.DelegatedEventHandler('mouseover', loader);
     var MouseMoveProximityTrigger = new scope.MouseMoveProximityTrigger(loader);
     var NodeProximityTrigger = new scope.NodeProximityTrigger(loader);
 
@@ -39,7 +39,7 @@
                 'mouseover': MouseOverTrigger
             }[trigger.type];
 
-        provider({
+        provider.addTrigger({
             el: params.el,
             selector: params.selector,
             src: params.src,

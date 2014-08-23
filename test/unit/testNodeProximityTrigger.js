@@ -17,13 +17,13 @@ describe('NodeProximityTrigger', function() {
 
     describe('addTrigger', function() {
         var loader,
-            addTrigger;
+            nodeProximityTrigger;
 
         beforeEach(function() {
             loader = {
                 load: sinon.spy()
             },
-            addTrigger = new NodeProximityTrigger(loader);
+            nodeProximityTrigger = new NodeProximityTrigger(loader);
 
             container.style.height = '1000px';
             container.style.width = '1000px';
@@ -31,7 +31,7 @@ describe('NodeProximityTrigger', function() {
         });
 
         it('should create a tripwire around a node', function() {
-            addTrigger({
+            nodeProximityTrigger.addTrigger({
                 el: container.querySelector('#theDiv'),
                 src: 'some/src',
                 distance: '100'
@@ -48,7 +48,7 @@ describe('NodeProximityTrigger', function() {
         });
 
         it('should call the loader when mousing over the tripwire', function() {
-            addTrigger({
+            nodeProximityTrigger.addTrigger({
                 el: container.querySelector('#theDiv'),
                 src: 'some/src',
                 distance: '100'
@@ -63,7 +63,7 @@ describe('NodeProximityTrigger', function() {
         });
 
         it('should remove the tripwire after triggering', function() {
-            addTrigger({
+            nodeProximityTrigger.addTrigger({
                 el: container.querySelector('#theDiv'),
                 src: 'some/src',
                 distance: '100'
