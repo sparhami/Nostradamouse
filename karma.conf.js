@@ -5,6 +5,7 @@ module.exports = function(karma) {
 
         // list of files / patterns to load in the browser
         files: [
+          'bower_components/platform/platform.js',
           'src/nmouse.js',
           'src/Utils.js',
           'src/triggers/*.js',
@@ -60,7 +61,7 @@ module.exports = function(karma) {
         // - PhantomJS
         // - IE (only Windows)
         // CLI --browsers Chrome,Firefox,Safari
-        browsers: ['Chrome'],
+        browsers: ['Chrome', 'Firefox'],
 
         // If browser does not capture in given timeout [ms], kill it
         // CLI --capture-timeout 5000

@@ -1,3 +1,5 @@
+/*jshint expr: true*/
+
 describe('Loader', function() {
     var loader,
         head = document.querySelector('head'),
@@ -17,12 +19,13 @@ describe('Loader', function() {
 
             loader.load('some/src');
 
-            expect(head.appendChild).to.have.been.calledOnce;
-            expect(head.appendChild).to.have.been.calledWithMatch(function(arg) {
-                return arg instanceof HTMLLinkElement &&
-                    arg.getAttribute('rel') === 'import' &&
-                    arg.getAttribute('href') === 'some/src';
-            });
+            expect(head.appendChild).to.have.been
+                .calledOnce
+                .calledWithMatch(function(arg) {
+                    return arg instanceof HTMLLinkElement &&
+                        arg.getAttribute('rel') === 'import' &&
+                        arg.getAttribute('href') === 'some/src';
+                });
         });
 
         it('should load multiple sources', function() {

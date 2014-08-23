@@ -16,11 +16,11 @@
 
             if(style.overflow !== 'visible' || style.position === 'static') {
                 if(DEBUG) {
-                    console.warn('Cannot create a simple trigger due to positioning or overflow, falling back to using mousemove.')
+                    console.warn('Cannot create a simple trigger due to positioning or overflow, falling back to using mousemove.');
                 }
-                return MouseMoveProximityTrigger(params);
+                MouseMoveProximityTrigger.addTrigger(params);
             } else {
-                return NodeProximityTrigger(params);
+                NodeProximityTrigger.addTrigger(params);
             }
         };
     })();

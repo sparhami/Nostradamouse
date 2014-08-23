@@ -1,3 +1,5 @@
+/*jshint expr: true*/
+
 describe('NodeProximityTrigger', function() {
     var body = document.body,
         sandbox = sinon.sandbox.create(),
@@ -6,7 +8,6 @@ describe('NodeProximityTrigger', function() {
 
     beforeEach(function() {
         container = document.createElement('div');
-        container.id = 'container';
         body.appendChild(container);
     });
 
@@ -40,7 +41,7 @@ describe('NodeProximityTrigger', function() {
             var tripwire = container.querySelector('.nmouse-tripwire'),
                 rect = tripwire.getBoundingClientRect();
 
-            expect(tripwire).to.not.be.null;
+            expect(tripwire).to.exist;
             expect(rect.top).to.equal(100);
             expect(rect.bottom).to.equal(400);
             expect(rect.left).to.equal(100);
@@ -58,8 +59,9 @@ describe('NodeProximityTrigger', function() {
 
             tripwire.dispatchEvent(new CustomEvent('mouseover', {}));
 
-            expect(loader.load).to.have.been.calledOnce;
-            expect(loader.load).to.have.been.calledWith('some/src');
+            expect(loader.load)
+                .to.have.been.calledOnce
+                .to.have.been.calledWith('some/src');
         });
 
         it('should remove the tripwire after triggering', function() {
@@ -74,7 +76,7 @@ describe('NodeProximityTrigger', function() {
             tripwire.dispatchEvent(new CustomEvent('mouseover', {}));
             tripwire = container.querySelector('.nmouse-tripwire');
 
-            expect(tripwire).to.be.null;
+            expect(tripwire).to.not.exist;
         });
     });
 });

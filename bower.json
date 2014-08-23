@@ -1,0 +1,24 @@
+{
+  "name": "Nostradamouse",
+  "version": "0.0.0",
+  "authors": [
+    "sparhami <sepandparhami@gmail.com>"
+  ],
+  "description": "Helps you lazy-load web components",
+  "keywords": [
+    "lazy",
+    "webcomponents"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "platform": "Polymer/platform#~0.3.5"
+  }
+}

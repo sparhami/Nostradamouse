@@ -1,12 +1,13 @@
+/*jshint expr: true*/
+
 describe('Utils', function() {
-    var body = document.body,
+    var body = document.querySelector('body'),
         sandbox = sinon.sandbox.create(),
         Utils = Nostradamouse.Utils,
         container;
 
     beforeEach(function() {
         container = document.createElement('div');
-        container.id = 'container';
         body.appendChild(container);
     });
 
@@ -50,14 +51,14 @@ describe('Utils', function() {
         });
 
         it('should return the matching node when present', function() {
-            var ancestry = Utils.getAncestry(document.querySelector('.someClass'));
+            var ancestry = Utils.getAncestry(document.querySelector('.someClass')),
+                nodeOne = document.querySelector('.someClass'),
+                html = document.querySelector('html');
 
-            expect(ancestry).to.deep.equal([
-                document.querySelector('.someClass'),
-                document.querySelector('#container'),
-                document.querySelector('body'),
-                document.querySelector('html')
-            ]);
+            expect(ancestry[0]).to.equal(nodeOne);
+            expect(ancestry[1]).to.equal(container);
+            expect(ancestry[2]).to.equal(body);
+            expect(ancestry[3]).to.equal(html);
         });
 
     });
@@ -78,6 +79,5 @@ describe('Utils', function() {
                 propTwo: 2
             });
         });
-
     });
 });

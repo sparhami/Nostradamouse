@@ -9,6 +9,7 @@
     "karma-chai-sinon": "*",
     "karma-firefox-launcher": "*",
     "karma-chrome-launcher": "*",
-    "karma-coverage": "~0.2.6"
+    "karma-coverage": "~0.2.6",
+    "grunt-contrib-jshint": "~0.10.0"
   }
 }

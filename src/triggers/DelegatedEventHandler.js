@@ -10,7 +10,10 @@
 
     DelegatedEventHandler.prototype = {
         setupListener: function() {
-            if(!!this.triggers.length === !this.eventAttached) {
+            var haveTrigers = !!this.triggers.length,
+                haveListener = this.eventAttached;
+
+            if(haveTrigers !== haveListener) {
                 window[this.eventAttached ? 'removeEventListener' : 'addEventListener'](this.evtName, this, true);
                 this.eventAttached = !this.eventAttached;
             }
