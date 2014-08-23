@@ -1,0 +1,21 @@
+{
+  "name": "LazyPage",
+  "version": "0.0.0",
+  "authors": [
+    "sparhami <sepandparhami@gmail.com>"
+  ],
+  "description": "A test page that uses lazy loading of web components",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "paper-button": "Polymer/paper-button#~0.3.5",
+    "paper-dialog": "Polymer/paper-dialog#~0.3.5"
+  }
+}

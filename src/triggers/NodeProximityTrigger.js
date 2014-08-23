@@ -1,0 +1,34 @@
+(function(scope) {
+
+    var NodeProximityTrigger = function(loader) {
+        this.loader = loader;
+
+        return this.addTrigger.bind(this);
+    };
+
+    NodeProximityTrigger.prototype = {
+        addTrigger: function(params) {
+            var _this = this,
+                el = params.el,
+                src = params.src,
+                tripwire = document.createElement('div'),
+                style = tripwire.style;
+
+            style.position = 'absolute';
+            style.top = 0;
+            style.right = 0;
+            style.left = 0;
+            style.bottom = 0;
+            style.margin = '-' + params.distance + 'px';
+
+            tripwire.addEventListener('mouseover', function() {
+                _this.loadDef(src);
+                el.removeChild(tripwire);
+            });
+
+            el.appendChild(tripwire);
+        }
+    };
+
+    scope.NodeProximityTrigger = NodeProximityTrigger;
+})(Nostradamouse);

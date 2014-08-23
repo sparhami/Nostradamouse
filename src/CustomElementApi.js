@@ -1,0 +1,43 @@
+/**
+ * Custom Element bindings
+ *
+ * Example usage:
+ * <code>
+ *  <nmouse-rule
+ *   el="#some .css > selector"
+ *   src="path/to/element/definition">
+ *   <nmouse-trigger
+ *     type="proximity"
+ *     distance="100">
+ *   </nmouse-trigger>
+ *   <nmouse-trigger type="focus"></nmouse-trigger>
+ *  </nmouse-rule>
+ * </code>
+ */
+(function(scope) {
+    'use strict';
+
+    var nmouse = scope.nmouse,
+        proto = Object.create(HTMLElement.prototype);
+
+    proto.attachedCallback = function() {
+        var triggers = [].slice.call(this.querySelectorAll('nmouse-trigger'))
+            .map(function(node) {
+                return {
+                    type: node.getAttribute('type'),
+                    distance: node.getAttribute('distance')
+                };
+            });
+
+        nmouse.prepare({
+            el: this.getAttribute('el'),
+            selector: this.getAttribute('selector'),
+            src: this.getAttribute('src'),
+            triggers: triggers
+        });
+    };
+
+    document.registerElement('nmouse-rule', {
+        prototype: proto
+    });
+})(Nostradamouse);

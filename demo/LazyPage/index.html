@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lazy</title>
+
+        <link rel="stylesheet" type="text/css" href="css/style.css"></link>
+    <script src="bower_components/platform/platform.js"></script>
+    <script src="/src/nmouse.js"></script>
+    <script src="/src/Utils.js"></script>
+    <script src="/src/Loader.js"></script>
+    <script src="/src/triggers/DelegatedEventHandler.js"></script>
+    <script src="/src/triggers/MouseMoveProximityTrigger.js"></script>
+    <script src="/src/triggers/NodeProximityTrigger.js"></script>
+    <script src="/src/main.js"></script>
+    <script src="/src/CustomElementApi.js"></script>
+    <link rel="import" href="bower_components/polymer/polymer.html"></link>
+</head>
+<body>
+    <x-autosuggest id="searchBox">
+        <input type="search" placeholder="Search" />
+    </x-autosuggest>
+    <button id="settingsBtn">Settings</button>
+
+
+    <!--  nmouse rules -->
+    <nmouse-rule el="#settingsBtn"
+                 selector="#settingsBtn"
+                 src="components/x-settings/x-settings.html">
+        <nmouse-trigger
+                        type="mouseover">
+        </nmouse-trigger>
+    </nmouse-rule>
+    <nmouse-rule el="#searchBox > input"
+                 selector="#searchBox"
+                 src="components/x-autosuggest/x-autosuggest.html"
+                 >
+        <nmouse-trigger type="focus"></nmouse-trigger>
+    </nmouse-rule>
+    <!--  end nmouse rules -->
+
+</body>
+<script src="js/index.js"></script>
+</html>
