@@ -1,4 +1,4 @@
-describe('Utils', function() {
+describe('CustomElementAPi', function() {
     var body = document.body,
         sandbox = sinon.sandbox.create(),
         container;

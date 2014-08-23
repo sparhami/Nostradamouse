@@ -21,8 +21,9 @@
             style.bottom = 0;
             style.margin = '-' + params.distance + 'px';
 
+            tripwire.className = 'nmouse-tripwire';
             tripwire.addEventListener('mouseover', function() {
-                _this.loadDef(src);
+                _this.loader.load(src);
                 el.removeChild(tripwire);
             });
 
