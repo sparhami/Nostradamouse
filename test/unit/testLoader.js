@@ -19,9 +19,9 @@ describe('Loader', function() {
 
             expect(head.appendChild).to.have.been.calledOnce;
             expect(head.appendChild).to.have.been.calledWithMatch(function(arg) {
-              return arg instanceof HTMLLinkElement &&
-                     arg.getAttribute('rel') === 'import' &&
-                     arg.getAttribute('href') === 'some/src';
+                return arg instanceof HTMLLinkElement &&
+                    arg.getAttribute('rel') === 'import' &&
+                    arg.getAttribute('href') === 'some/src';
             });
         });
 

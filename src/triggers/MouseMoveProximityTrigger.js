@@ -20,9 +20,9 @@
 
         getTrippedTriggers: function(e) {
             var coords = {
-                    x: e.clientX,
-                    y: e.clientY
-                };
+                x: e.clientX,
+                y: e.clientY
+            };
 
             return triggers
             .filter(function(trigger) {

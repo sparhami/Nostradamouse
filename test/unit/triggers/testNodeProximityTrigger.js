@@ -22,7 +22,7 @@ describe('NodeProximityTrigger', function() {
         beforeEach(function() {
             loader = {
                 load: sinon.spy()
-            },
+            };
             nodeProximityTrigger = new NodeProximityTrigger(loader);
 
             container.style.height = '1000px';

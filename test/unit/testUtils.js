@@ -17,7 +17,7 @@ describe('Utils', function() {
 
     describe('getNode', function() {
         beforeEach(function() {
-           container.innerHTML = '<div><div class="someClass"></div></div>';
+            container.innerHTML = '<div><div class="someClass"></div></div>';
         });
 
         it('should return the matching node when present', function() {
@@ -46,7 +46,7 @@ describe('Utils', function() {
 
     describe('getAncestry', function() {
         beforeEach(function() {
-           container.innerHTML = '<span class="someClass"></span>';
+            container.innerHTML = '<span class="someClass"></span>';
         });
 
         it('should return the matching node when present', function() {

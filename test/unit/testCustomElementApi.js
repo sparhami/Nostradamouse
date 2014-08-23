@@ -20,8 +20,8 @@ describe('CustomElementAPi', function() {
 
             container.innerHTML = '' +
                 '<nmouse-rule src="src" el="#someId">' +
-                    '<nmouse-trigger type="focus"></nmouse-trigger>' +
-                    '<nmouse-trigger type="click"></nmouse-trigger>' +
+                '<nmouse-trigger type="focus"></nmouse-trigger>' +
+                '<nmouse-trigger type="click"></nmouse-trigger>' +
                 '</nmouse-rule>';
 
             expect(nmouse.prepare).to.have.been.calledWithMatch({
