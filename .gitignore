@@ -1,5 +1,6 @@
 .project
 build/
+release/
 coverage/
 node_modules/
 bower_components/

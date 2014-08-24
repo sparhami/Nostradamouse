@@ -1,0 +1,8 @@
+[
+    "src/nmouse.js",
+    "src/Utils.js",
+    "src/triggers/*.js",
+    "src/Loader.js",
+    "src/main.js",
+    "src/CustomElementApi.js"
+]

@@ -1,36 +1,34 @@
-(function(scope) {
-    var Utils = {
-        mix: function(dest, src) {
-            Object.keys(src).forEach(function(key) {
-                dest[key] = src[key];
-            });
-        },
+var Utils = {
+    mix: function(dest, src) {
+        Object.keys(src).forEach(function(key) {
+            dest[key] = src[key];
+        });
 
-        getNode: function(thing) {
-            if(typeof thing === 'string') {
-                return document.querySelector(thing);
-            } else if(thing instanceof HTMLElement) {
-                return thing;
-            }
+        return dest;
+    },
 
-            if(DEBUG) {
-                throw Error('invalid thing specified');
-            }
-        },
-
-        getAncestry: function(node) {
-            var nodes = [],
-                curNode;
-
-            for(curNode = node; curNode; curNode = curNode.parentElement) {
-                if(curNode instanceof HTMLElement) {
-                    nodes.push(curNode);
-                }
-            }
-
-            return nodes;
+    getNode: function(thing) {
+        if(typeof thing === 'string') {
+            return document.querySelector(thing);
+        } else if(thing instanceof HTMLElement) {
+            return thing;
         }
-    };
 
-    scope.Utils = Utils;
-})(Nostradamouse);
+        if(DEBUG) {
+            throw Error('invalid thing specified');
+        }
+    },
+
+    getAncestry: function(node) {
+        var nodes = [],
+            curNode;
+
+        for(curNode = node; curNode; curNode = curNode.parentElement) {
+            if(curNode instanceof HTMLElement) {
+                nodes.push(curNode);
+            }
+        }
+
+        return nodes;
+    }
+};

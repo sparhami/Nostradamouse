@@ -3,7 +3,6 @@
 describe('NodeProximityTrigger', function() {
     var body = document.body,
         sandbox = sinon.sandbox.create(),
-        NodeProximityTrigger = Nostradamouse.NodeProximityTrigger,
         container;
 
     beforeEach(function() {

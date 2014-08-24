@@ -1,4 +1,3 @@
-
 var settingsBtn = document.getElementById('settingsBtn'),
     settingsDialog,
     toast = document.getElementById('componentLoadedToast'),
@@ -13,9 +12,9 @@ settingsBtn.addEventListener('click', function() {
     settingsDialog.opened = true;
 });
 
-var load = Nostradamouse.Loader.prototype.load;
+var load = nmouse.Loader.prototype.load;
 
-Nostradamouse.Loader.prototype.load = function(src) {
+nmouse.Loader.prototype.load = function(src) {
     load.call(this, src, function() {
         toast.setAttribute('text', 'Loaded ' + src);
         toast.show();

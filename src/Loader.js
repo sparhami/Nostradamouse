@@ -1,23 +1,21 @@
-(function(scope) {
-    var Loader = function() {
-        this.loadedDefinitions = {};
-    };
+var Loader = function() {
+    this.loadedDefs = {};
+};
 
-    Loader.prototype.load = function(src, callback) {
-        if(this.loadedDefinitions[src]) {
-            return;
-        }
+Loader.prototype.load = function(src, callback) {
+    var loadedDefs = this.loadedDefs;
 
-        var head = document.querySelector('head'),
-            link = document.createElement('link');
+    if(loadedDefs[src]) {
+        return;
+    }
 
-        link.href = src;
-        link.rel = 'import';
-        link.onload = callback;
-        head.appendChild(link);
+    var head = document.querySelector('head'),
+        link = document.createElement('link');
 
-        this.loadedDefinitions[src] = src;
-    };
+    link.href = src;
+    link.rel = 'import';
+    link.onload = callback;
+    head.appendChild(link);
 
-    scope.Loader = Loader;
-})(Nostradamouse);
+    loadedDefs[src] = src;
+};

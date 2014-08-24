@@ -14,30 +14,25 @@
  *  </nmouse-rule>
  * </code>
  */
-(function(scope) {
-    'use strict';
-
-    var nmouse = scope.nmouse,
-        proto = Object.create(HTMLElement.prototype);
-
-    proto.attachedCallback = function() {
-        var triggers = [].slice.call(this.querySelectorAll('nmouse-trigger'))
-            .map(function(node) {
-                return {
-                    type: node.getAttribute('type'),
-                    distance: node.getAttribute('distance')
-                };
-            });
-
-        nmouse.prepare({
-            el: this.getAttribute('el'),
-            selector: this.getAttribute('selector'),
-            src: this.getAttribute('src'),
-            triggers: triggers
-        });
-    };
-
+(function() {
     document.registerElement('nmouse-rule', {
-        prototype: proto
+        prototype: Utils.mix(Object.create(HTMLElement.prototype), {
+            attachedCallback: function() {
+                var triggers = [].slice.call(this.querySelectorAll('nmouse-trigger'))
+                    .map(function(node) {
+                        return {
+                            type: node.getAttribute('type'),
+                            distance: node.getAttribute('distance')
+                        };
+                    });
+
+                nmouse.prepare({
+                    el: this.getAttribute('el'),
+                    selector: this.getAttribute('selector'),
+                    src: this.getAttribute('src'),
+                    triggers: triggers
+                });
+            }
+        })
     });
-})(Nostradamouse);
+})();

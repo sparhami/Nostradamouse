@@ -6,7 +6,7 @@ describe('Loader', function() {
         sandbox = sinon.sandbox.create();
 
     beforeEach(function() {
-        loader = new Nostradamouse.Loader();
+        loader = new Loader();
     });
 
     afterEach(function() {

@@ -3,7 +3,6 @@
 describe('Utils', function() {
     var body = document.querySelector('body'),
         sandbox = sinon.sandbox.create(),
-        Utils = Nostradamouse.Utils,
         container;
 
     beforeEach(function() {

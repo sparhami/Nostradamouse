@@ -3,8 +3,6 @@
 describe('DelegatedEventHandler', function() {
     var body = document.body,
         sandbox = sinon.sandbox.create(),
-        Utils = Nostradamouse.Utils,
-        DelegatedEventHandler = Nostradamouse.DelegatedEventHandler,
         container,
         loader,
         delegatedEventHandler;

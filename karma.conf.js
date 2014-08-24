@@ -3,23 +3,6 @@ module.exports = function(karma) {
         // base path, that will be used to resolve files and exclude
         basePath: '.',
 
-        // list of files / patterns to load in the browser
-        files: [
-          'bower_components/platform/platform.js',
-          'src/nmouse.js',
-          'src/Utils.js',
-          'src/triggers/*.js',
-          'src/Loader.js',
-          'src/main.js',
-          'src/CustomElementApi.js',
-          'test/unit/**/*.js'
-        ],
-
-        // list of files to exclude
-        exclude: [
-
-        ],
-
         frameworks: ['mocha', 'chai-sinon'],
 
         // possible values: 'dots', 'progress', 'junit', 'teamcity'
@@ -73,12 +56,7 @@ module.exports = function(karma) {
 
         // report which specs are slower than 500ms
         // CLI --report-slower-than 500
-        reportSlowerThan: 500,
-
-        // compile coffee scripts
-        preprocessors: {
-
-        }
+        reportSlowerThan: 500
     });
 }
 

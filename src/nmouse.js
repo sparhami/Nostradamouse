@@ -1,5 +1,3 @@
-if (typeof DEBUG === 'undefined') {
+if(typeof DEBUG === 'undefined') {
     DEBUG = true;
 }
-
-Nostradamouse = {};

@@ -1,16 +1,14 @@
-(function(scope) {
-    'use strict';
+(function() {
+    var loader = new Loader();
 
-    var loader = new scope.Loader();
+    var clickTriggerHandler = new DelegatedEventHandler('click', loader);
+    var focusTriggerHandler = new DelegatedEventHandler('focus', loader);
+    var mouseOverTriggerHandler = new DelegatedEventHandler('mouseover', loader);
+    var mouseMoveProximityTriggerHandler = new MouseMoveProximityTrigger(loader);
+    var nodeProximityTriggerHandler = new NodeProximityTrigger(loader);
 
-    var ClickTrigger = new scope.DelegatedEventHandler('click', loader);
-    var FocusTrigger = new scope.DelegatedEventHandler('focus', loader);
-    var MouseOverTrigger = new scope.DelegatedEventHandler('mouseover', loader);
-    var MouseMoveProximityTrigger = new scope.MouseMoveProximityTrigger(loader);
-    var NodeProximityTrigger = new scope.NodeProximityTrigger(loader);
-
-    var ProximityTrigger = (function() {
-        return function(params) {
+    var proximityTriggerHandler = {
+        addTrigger: function(params) {
             var el = getNode(params.el),
                 style = getComputedStyle(el);
 
@@ -18,12 +16,12 @@
                 if(DEBUG) {
                     console.warn('Cannot create a simple trigger due to positioning or overflow, falling back to using mousemove.');
                 }
-                MouseMoveProximityTrigger.addTrigger(params);
+                mouseMoveProximityTriggerHandler.addTrigger(params);
             } else {
-                NodeProximityTrigger.addTrigger(params);
+                nodeProximityTriggerHandler.addTrigger(params);
             }
-        };
-    })();
+        }
+    };
 
     function prepare(params) {
         params.triggers.forEach(function(trigger) {
@@ -33,11 +31,11 @@
 
     function prepareTrigger(trigger, params) {
         var provider = {
-                'proximity': ProximityTrigger,
-                'focus': FocusTrigger,
-                'click': ClickTrigger,
-                'mouseover': MouseOverTrigger
-            }[trigger.type];
+            'proximity': proximityTriggerHandler,
+            'focus': focusTriggerHandler,
+            'click': clickTriggerHandler,
+            'mouseover': mouseOverTriggerHandler
+        }[trigger.type];
 
         provider.addTrigger({
             el: params.el,
@@ -47,7 +45,8 @@
         });
     }
 
-    window.nmouse = scope.nmouse = {
-        prepare: prepare
+    window.nmouse = {
+        prepare: prepare,
+        Loader: Loader
     };
-})(Nostradamouse);
+})();
