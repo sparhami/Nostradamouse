@@ -8,10 +8,10 @@ MouseMoveProximityTrigger.prototype = Utils.mix(Object.create(DelegatedEventHand
     isNear: function(rect, coords, distance) {
         var x = (rect.left + rect.right) / 2,
             y = (rect.top + rect.bottom) / 2,
-            dx = Math.max(Math.abs(coords.x - x) - (rect.width / 2), 0),
-            dy = Math.max(Math.abs(coords.y - y) - (rect.height / 2), 0);
+            dx = Math.abs(coords.x - x) - (rect.width / 2),
+            dy = Math.abs(coords.y - y) - (rect.height / 2);
 
-        return Math.sqrt(dx * dx + dy * dy) <= distance;
+        return dx <= distance && dy <= distance;
     },
 
     getTrippedTriggers: function(e) {
@@ -20,7 +20,7 @@ MouseMoveProximityTrigger.prototype = Utils.mix(Object.create(DelegatedEventHand
             y: e.clientY
         };
 
-        return triggers
+        return this.triggers
         .filter(function(trigger) {
             return this.isNear(trigger.el.getBoundingClientRect(), coords, trigger.distance);
         }, this);

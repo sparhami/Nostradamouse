@@ -1,8 +1,8 @@
 [
-    "src/nmouse.js",
+    "src/defs.js",
     "src/Utils.js",
     "src/triggers/*.js",
     "src/Loader.js",
-    "src/main.js",
+    "src/nmouse.js",
     "src/CustomElementApi.js"
 ]
