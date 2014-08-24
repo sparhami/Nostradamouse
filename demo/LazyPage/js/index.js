@@ -16,11 +16,8 @@ settingsBtn.addEventListener('click', function() {
 var load = Nostradamouse.Loader.prototype.load;
 
 Nostradamouse.Loader.prototype.load = function(src) {
-    load.apply(this, arguments);
-
-    // Toast looks messed up if we show it right away
-    window.setTimeout(function() {
-        toast.setAttribute('text', 'Loading ' + src);
+    load.call(this, src, function() {
+        toast.setAttribute('text', 'Loaded ' + src);
         toast.show();
-    }, 100);
+    });
 };

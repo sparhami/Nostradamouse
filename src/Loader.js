@@ -3,7 +3,7 @@
         this.loadedDefinitions = {};
     };
 
-    Loader.prototype.load = function(src) {
+    Loader.prototype.load = function(src, callback) {
         if(this.loadedDefinitions[src]) {
             return;
         }
@@ -13,6 +13,7 @@
 
         link.href = src;
         link.rel = 'import';
+        link.onload = callback;
         head.appendChild(link);
 
         this.loadedDefinitions[src] = src;
