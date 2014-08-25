@@ -8,6 +8,8 @@ describe('CustomElementAPi', function() {
     beforeEach(function() {
         container = document.createElement('div');
         body.appendChild(container);
+
+        sandbox.stub(nmouse, 'prepare');
     });
 
     afterEach(function() {
@@ -17,8 +19,6 @@ describe('CustomElementAPi', function() {
 
     describe('nmouse-rule', function() {
         it('should call prepare with the triggers', function(done) {
-            sandbox.stub(nmouse, 'prepare');
-
             container.innerHTML = '' +
                 '<nmouse-rule src="src" el="#someId">' +
                 '<nmouse-trigger type="focus"></nmouse-trigger>' +
@@ -50,8 +50,6 @@ describe('CustomElementAPi', function() {
         });
 
         it('should call prepare for each rule', function(done) {
-            sandbox.stub(nmouse, 'prepare');
-
             container.innerHTML = '' +
                 '<nmouse-rule src="src" el="#someId"></nmouse-rule>' +
                 '<nmouse-rule src="src2" el="#someId2"></nmouse-rule>';

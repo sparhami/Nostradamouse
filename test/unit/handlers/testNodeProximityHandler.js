@@ -2,7 +2,6 @@
 
 describe('NodeProximityHandler', function() {
     var body = document.body,
-        sandbox = sinon.sandbox.create(),
         container;
 
     beforeEach(function() {
@@ -11,7 +10,6 @@ describe('NodeProximityHandler', function() {
     });
 
     afterEach(function() {
-        sandbox.restore();
         body.removeChild(container);
     });
 

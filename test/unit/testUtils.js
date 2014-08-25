@@ -2,7 +2,6 @@
 
 describe('Utils', function() {
     var body = document.querySelector('body'),
-        sandbox = sinon.sandbox.create(),
         container;
 
     beforeEach(function() {
@@ -11,7 +10,6 @@ describe('Utils', function() {
     });
 
     afterEach(function() {
-        sandbox.restore();
         body.removeChild(container);
     });
 
@@ -82,29 +80,50 @@ describe('Utils', function() {
 
 
     describe('extend', function() {
-        var Child = function() {},
-            Parent = function() {},
-            childFn = function() {},
+        var Child,
+            Parent,
+            childFn,
+            parentFn;
+
+        beforeEach(function() {
+            Child = function() {};
+            Parent = function() {};
+            childFn = function() {};
             parentFn = function() {};
 
-        Parent.prototype = {
-            parentFn: parentFn
-        };
-
-        Utils.extend(Child, Parent, {
-            childFn: childFn
+            Parent.prototype = {
+                parentFn: parentFn
+            };
         });
 
         it('should add the parent to child\'s prototype chain', function() {
+            Utils.extend(Child, Parent, {
+                childFn: childFn
+            });
+
             expect(new Child()).to.be.instanceOf(Parent);
         });
 
         it('should set the child\'s constructor appropriately', function() {
+            Utils.extend(Child, Parent, {
+                childFn: childFn
+            });
+
             expect(Child.prototype.constructor).to.equal(Child);
         });
 
         it('should add prototype memebers to the child', function() {
+            Utils.extend(Child, Parent, {
+                childFn: childFn
+            });
+
             expect(Child.prototype.childFn).to.equal(childFn);
+        });
+
+        it('should handle extending without adding prototype memnbers', function() {
+            Utils.extend(Child, Parent);
+
+            expect(new Child()).to.be.instanceOf(Parent);
         });
     });
 });
