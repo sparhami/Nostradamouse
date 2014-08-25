@@ -1,15 +1,15 @@
 /*jshint expr: true*/
 
-describe('DelegatedEventHandler', function() {
+describe('MouseMoveProximityHandler', function() {
     var loader,
-        mouseMoveProximityTrigger;
+        mouseMoveProximityHandler;
 
     beforeEach(function() {
         loader = {
             load: sinon.spy()
         };
 
-        mouseMoveProximityTrigger = new MouseMoveProximityTrigger(loader);
+        mouseMoveProximityHandler = new MouseMoveProximityHandler(loader);
     });
 
     describe('getTrippedTriggers', function() {
@@ -31,8 +31,8 @@ describe('DelegatedEventHandler', function() {
                 distance: 100
             };
 
-            mouseMoveProximityTrigger.addTrigger(triggerOne);
-            mouseMoveProximityTrigger.addTrigger(triggerTwo);
+            mouseMoveProximityHandler.addTrigger(triggerOne);
+            mouseMoveProximityHandler.addTrigger(triggerTwo);
         });
 
         it('should return an array of all nearby triggers', function() {
@@ -57,7 +57,7 @@ describe('DelegatedEventHandler', function() {
                 clientY: 0
             };
 
-            expect(mouseMoveProximityTrigger.getTrippedTriggers(event))
+            expect(mouseMoveProximityHandler.getTrippedTriggers(event))
                 .to.contain(triggerOne)
                 .to.not.contain(triggerTwo);
         });

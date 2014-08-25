@@ -1,8 +1,8 @@
-var NodeProximityTrigger = function(loader) {
+var NodeProximityHandler = function(loader) {
     this.loader = loader;
 };
 
-NodeProximityTrigger.prototype = {
+NodeProximityHandler.prototype = {
     addTrigger: function(params) {
         var _this = this,
             el = params.el,

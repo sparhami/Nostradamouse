@@ -7,6 +7,11 @@ var Utils = {
         return dest;
     },
 
+    extend: function(child, parent, protoFunctions) {
+        child.prototype = this.mix(Object.create(parent.prototype), protoFunctions || {});
+        child.prototype.constructor = child;
+    },
+
     getNode: function(thing) {
         if(typeof thing === 'string') {
             return document.querySelector(thing);

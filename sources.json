@@ -1,7 +1,7 @@
 [
     "src/defs.js",
     "src/Utils.js",
-    "src/triggers/*.js",
+    "src/handlers/*.js",
     "src/Loader.js",
     "src/nmouse.js",
     "src/CustomElementApi.js"

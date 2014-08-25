@@ -1,13 +1,13 @@
 (function() {
     var loader = new Loader();
 
-    var clickTriggerHandler = new DelegatedEventHandler('click', loader);
-    var focusTriggerHandler = new DelegatedEventHandler('focus', loader);
-    var mouseOverTriggerHandler = new DelegatedEventHandler('mouseover', loader);
-    var mouseMoveProximityTriggerHandler = new MouseMoveProximityTrigger(loader);
-    var nodeProximityTriggerHandler = new NodeProximityTrigger(loader);
+    var clickHandler = new DelegatedEventHandler('click', loader);
+    var focusHandler = new DelegatedEventHandler('focus', loader);
+    var mouseOverHandler = new DelegatedEventHandler('mouseover', loader);
+    var mouseMoveProximityHandler = new MouseMoveProximityHandler(loader);
+    var nodeProximityHandler = new NodeProximityHandler(loader);
 
-    var proximityTriggerHandler = {
+    var proximityHandler = {
         addTrigger: function(params) {
             var el = getNode(params.el),
                 style = getComputedStyle(el);
@@ -31,10 +31,10 @@
 
     function prepareTrigger(trigger, params) {
         var provider = {
-            'proximity': proximityTriggerHandler,
-            'focus': focusTriggerHandler,
-            'click': clickTriggerHandler,
-            'mouseover': mouseOverTriggerHandler
+            'proximity': proximityHandler,
+            'focus': focusHandler,
+            'click': clickHandler,
+            'mouseover': mouseOverHandler
         }[trigger.type];
 
         provider.addTrigger({

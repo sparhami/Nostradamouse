@@ -79,4 +79,32 @@ describe('Utils', function() {
             });
         });
     });
+
+
+    describe('extend', function() {
+        var Child = function() {},
+            Parent = function() {},
+            childFn = function() {},
+            parentFn = function() {};
+
+        Parent.prototype = {
+            parentFn: parentFn
+        };
+
+        Utils.extend(Child, Parent, {
+            childFn: childFn
+        });
+
+        it('should add the parent to child\'s prototype chain', function() {
+            expect(new Child()).to.be.instanceOf(Parent);
+        });
+
+        it('should set the child\'s constructor appropriately', function() {
+            expect(Child.prototype.constructor).to.equal(Child);
+        });
+
+        it('should add prototype memebers to the child', function() {
+            expect(Child.prototype.childFn).to.equal(childFn);
+        });
+    });
 });

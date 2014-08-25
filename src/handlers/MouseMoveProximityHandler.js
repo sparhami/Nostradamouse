@@ -1,10 +1,8 @@
-var MouseMoveProximityTrigger = function(loader) {
+var MouseMoveProximityHandler = function(loader) {
     DelegatedEventHandler.call(this, 'mousemove', loader);
 };
 
-MouseMoveProximityTrigger.prototype = Utils.mix(Object.create(DelegatedEventHandler.prototype), {
-    constructor: MouseMoveProximityTrigger,
-
+Utils.extend(MouseMoveProximityHandler, DelegatedEventHandler, {
     isNear: function(rect, coords, distance) {
         var x = (rect.left + rect.right) / 2,
             y = (rect.top + rect.bottom) / 2,
