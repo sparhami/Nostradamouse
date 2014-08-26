@@ -40,7 +40,7 @@ module.exports = function(grunt) {
         concat: {
             build: {
                 src: sources,
-                dest: 'build/nmouse.js'
+                dest: 'release/nmouse.js'
             }
         },
 
@@ -56,7 +56,7 @@ module.exports = function(grunt) {
             },
             build: {
                 files: {
-                    'release/nmouse.js': ['build/nmouse.js']
+                    'release/nmouse-min.js': ['release/nmouse.js']
                 }
 
             }
