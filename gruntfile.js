@@ -71,4 +71,6 @@ module.exports = function(grunt) {
     grunt.registerTask('unit', ['karma:unit']);
     grunt.registerTask('bundle', ['concat:build', 'uglify:build']);
     grunt.registerTask('build', ['jshint:build', 'karma:build', 'bundle']);
+
+    grunt.registerTask('default', ['build']);
 };
