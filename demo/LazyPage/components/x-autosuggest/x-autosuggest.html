@@ -1,7 +1,7 @@
 <polymer-element
   name="x-autosuggest"
   attributes="opened"
-  on-click="{{open}}">
+  on-keydown="{{open}}">
   <template>
     <style>
       .dropdown {
@@ -9,7 +9,7 @@
         left: 0;
         right: 0;
       }
-      
+
       .overlay {
         position: fixed;
         left: 0;

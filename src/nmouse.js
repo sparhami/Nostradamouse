@@ -47,6 +47,6 @@
 
     window.nmouse = {
         prepare: prepare,
-        Loader: Loader
+        loader: loader
     };
 })();
