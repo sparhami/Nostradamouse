@@ -6,6 +6,7 @@
     var mouseOverHandler = new DelegatedEventHandler('mouseover', loader);
     var mouseMoveProximityHandler = new MouseMoveProximityHandler(loader);
     var nodeProximityHandler = new NodeProximityHandler(loader);
+    var nodeAddedHandler = new NodeAddedHandler(loader);
 
     var proximityHandler = {
         addTrigger: function(params) {
@@ -34,13 +35,15 @@
             'proximity': proximityHandler,
             'focus': focusHandler,
             'click': clickHandler,
-            'mouseover': mouseOverHandler
+            'mouseover': mouseOverHandler,
+            'added': nodeAddedHandler
         }[trigger.type];
 
         provider.addTrigger({
             el: params.el,
             selector: params.selector,
             src: params.src,
+            tagName: trigger.tagName,
             distance: trigger.distance
         });
     }

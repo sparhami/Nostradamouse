@@ -2,18 +2,13 @@ var DelegatedEventHandler = function(evtName, loader) {
     this.evtName = evtName;
     this.loader = loader;
     this.triggers = [];
-    this.eventAttached = false;
 };
 
 DelegatedEventHandler.prototype = {
     setupListener: function() {
-        var haveTrigers = !!this.triggers.length,
-            eventAttached = this.eventAttached;
+        var haveTriggers = !!this.triggers.length;
 
-        if(haveTrigers !== eventAttached) {
-            window[eventAttached ? 'removeEventListener' : 'addEventListener'](this.evtName, this, true);
-            this.eventAttached = !eventAttached;
-        }
+        window[haveTriggers ? 'addEventListener' : 'removeEventListener'](this.evtName, this, true);
     },
 
     getTrippedTriggers: function(e) {

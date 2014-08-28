@@ -27,40 +27,21 @@ describe('DelegatedEventHandler', function() {
     });
 
     describe('setupListener', function() {
-        it('should add a listener if there are triggers and no listener exists', function() {
+        it('should add a listener if there are triggers', function() {
             delegatedEventHandler.addTrigger({});
-            delegatedEventHandler.setupListener();
 
             expect(window.addEventListener).to.have.been.calledOnce;
             expect(window.removeEventListener).to.have.been.notCalled;
         });
 
-        it('should not add a listener if there are triggers and a listener exists', function() {
+        it('should remove the listener if there are no triggers', function() {
             delegatedEventHandler.addTrigger({});
-            delegatedEventHandler.setupListener();
-            delegatedEventHandler.setupListener();
-
-            expect(window.addEventListener).to.have.been.calledOnce;
-            expect(window.removeEventListener).to.have.been.notCalled;
-        });
-
-        it('should remove the listener if there are no triggers and a listener exists', function() {
-            delegatedEventHandler.addTrigger({});
-            delegatedEventHandler.setupListener();
 
             delegatedEventHandler.triggers = [];
             delegatedEventHandler.setupListener();
 
             expect(window.addEventListener).to.have.been.calledOnce;
             expect(window.removeEventListener).to.have.been.calledOnce;
-        });
-
-
-        it('should not remove the listener if there are no listener exists', function() {
-            delegatedEventHandler.setupListener();
-
-            expect(window.addEventListener).to.have.been.notCalled;
-            expect(window.removeEventListener).to.have.been.notCalled;
         });
     });
 

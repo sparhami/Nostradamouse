@@ -22,6 +22,7 @@
                     .map(function(node) {
                         return {
                             type: node.getAttribute('type'),
+                            tagName: node.getAttribute('tagName'),
                             distance: node.getAttribute('distance')
                         };
                     });

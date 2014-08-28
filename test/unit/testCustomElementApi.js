@@ -36,10 +36,12 @@ describe('CustomElementAPi', function() {
                         triggers: [
                             {
                                 distance: null,
+                                tagName: null,
                                 type: 'focus'
                             },
                             {
                                 distance: null,
+                                tagName: null,
                                 type: 'click'
                             }
                         ]
