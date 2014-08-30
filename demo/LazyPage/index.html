@@ -26,10 +26,10 @@
               href="css/style.css">
     </head>
     <body>
-        <x-autosuggest id="searchBox">
-            <input type="search"
+        <lazy-autosuggest id="searchBox">
+            <input type="text"
                    placeholder="Search" />
-        </x-autosuggest>
+        </lazy-autosuggest>
 
         <button id="settingsBtn">Settings</button>
 
@@ -46,7 +46,7 @@
         </nmouse-rule>
         <nmouse-rule el="#searchBox > input"
                      selector="#searchBox"
-                     src="components/x-autosuggest/x-autosuggest.html"
+                     src="bower_components/lazy-autosuggest/src/lazy-autosuggest.html"
                      >
             <nmouse-trigger type="mouseover"></nmouse-trigger>
         </nmouse-rule>

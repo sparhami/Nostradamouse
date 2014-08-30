@@ -4,20 +4,27 @@ html, body {
 
 body {
     overflow: hidden;
-    margin: 0;
+    margin: 20px;
 }
 
 #settingsBtn {
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    margin: 20px;
+    float: right;
 }
 
 #searchBox > input {
     width: 600px;
     max-width: 50%;
+}
 
-    margin: 20px;
+lazy-autosuggest input {
+    margin: 0;
+}
+
+lazy-autosuggest input,
+lazy-autosuggest::shadow .dropdown {
+    border: 1px solid #aaa;
+}
+
+lazy-autosuggest::shadow .selected {
+    background-color: #e2e2e2;
 }
