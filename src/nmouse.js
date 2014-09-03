@@ -1,5 +1,5 @@
 (function() {
-    var loader = new Loader();
+    var loader = new DepsTrackingLoader(new DepsStorage());
 
     var clickHandler = new DelegatedEventHandler('click', loader);
     var focusHandler = new DelegatedEventHandler('focus', loader);

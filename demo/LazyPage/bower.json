@@ -15,8 +15,8 @@
     "tests"
   ],
   "dependencies": {
-    "paper-button": "Polymer/paper-button#~0.3.5",
-    "paper-dialog": "Polymer/paper-dialog#~0.3.5",
+    "paper-button": "Polymer/paper-button#~0.4.0",
+    "paper-dialog": "Polymer/paper-dialog#~0.4.0",
     "paper-toast": "Polymer/paper-toast#~0.4.0",
     "lazy-autosuggest": "~0.0.2"
   }

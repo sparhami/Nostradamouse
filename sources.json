@@ -3,6 +3,7 @@
     "src/Utils.js",
     "src/handlers/*.js",
     "src/Loader.js",
+    "src/dependencies/*.js",
     "src/nmouse.js",
     "src/CustomElementApi.js"
 ]
