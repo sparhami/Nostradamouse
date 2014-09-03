@@ -32,6 +32,6 @@ DepsTrackingLoader.prototype = {
     },
 
     loadDeps: function(src) {
-        this.depsStorage.getDeps(src).forEach(this.load, this);
+        this.depsStorage.getDeps(src).forEach(this.load.bind(this));
     }
 };
