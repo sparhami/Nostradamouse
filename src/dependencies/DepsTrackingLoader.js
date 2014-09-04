@@ -35,10 +35,16 @@ DepsTrackingLoader.prototype = {
          * This is to make sure we traverse down and capture the whole
          * dependency tree on the first load of the page.
          */
-        deps.forEach(this.load.bind(this));
+        deps.forEach(function(dep) {
+            this.load(dep);
+        }, this);
     },
 
     loadDeps: function(src) {
-        this.depsStorage.getDeps(src).forEach(this.load.bind(this));
+        var deps = this.depsStorage.getDeps(src);
+
+        deps.forEach(function(dep) {
+            this.load(dep);
+        }, this);
     }
 };
