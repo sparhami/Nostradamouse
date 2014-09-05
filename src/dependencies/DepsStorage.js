@@ -2,8 +2,8 @@
 // -> keep track of keys that we add so that we can clear individual keys as needed
 // -> [ { key, timeLastUsed }, ... ]
 
-function DepsStorage() {
-    this.storage = localStorage;
+function DepsStorage(storage) {
+    this.storage = storage;
 }
 
 DepsStorage.prototype = {
