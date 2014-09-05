@@ -24,7 +24,7 @@ NodeAddedHandler.prototype = {
 
                 if(trigger) {
                     this.loader.load(trigger.src);
-                    delete this.triggers[trigger.tagName];
+                    delete this.triggers[node.tagName];
                 }
             }
         }, this);
