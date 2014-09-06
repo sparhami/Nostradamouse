@@ -11,20 +11,18 @@ body {
     float: right;
 }
 
-#searchBox > input {
+x-stateautosuggest input {
     width: 600px;
     max-width: 50%;
-}
 
-lazy-autosuggest input {
     margin: 0;
 }
 
-lazy-autosuggest input,
-lazy-autosuggest::shadow .dropdown {
+x-stateautosuggest input,
+x-stateautosuggest::shadow .dropdown {
     border: 1px solid #aaa;
 }
 
-lazy-autosuggest::shadow .selected {
+x-stateautosuggest::shadow .selected {
     background-color: #e2e2e2;
 }

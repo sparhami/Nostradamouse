@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0">
+        <title>Lazy</title>
+
+        <script src="bower_components/platform/platform.js"></script>
+        <script src="/release/nmouse.js" defer></script>
+        <link rel="import"
+              href="bower_components/polymer/polymer.html">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="css/style.css">
+    </head>
+    <body>
+        <x-stateautosuggest>
+            <input type="text"
+                   placeholder="Search" />
+        </x-stateautosuggest>
+
+        <!--  nmouse rules -->
+        <nmouse-rule selector="x-stateautosuggest"
+                     src="components/x-stateautosuggest/x-stateautosuggest.html"
+                     >
+            <nmouse-trigger type="focus"></nmouse-trigger>
+            <nmouse-trigger type="mouseover"></nmouse-trigger>
+        </nmouse-rule>
+        <!--  end nmouse rules -->
+    </body>
+</html>
