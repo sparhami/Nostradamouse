@@ -1,0 +1,4 @@
+/*
+ * Nostradamouse - (c) 2014 Sepand Parhami
+ * Licensed under the MIT license
+ */

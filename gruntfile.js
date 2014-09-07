@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
 
-    var sources = grunt.file.readJSON('sources.json');
+    var banner = grunt.file.read('conf/banner.txt');
+    var sources = grunt.file.readJSON('conf/sources.json');
     var karmaFiles = []
     .concat('bower_components/platform/platform.js')
     .concat(sources)
@@ -9,7 +10,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
         karma: {
             options: {
-                configFile: 'karma.conf.js',
+                configFile: 'conf/karma.conf.js',
                 files: karmaFiles
             },
 
@@ -30,6 +31,7 @@ module.exports = function(grunt) {
             options: {
                 jshintrc: true
             },
+
             build: [
                 'gruntfile.js',
                 'src/**/*.js',
@@ -38,9 +40,12 @@ module.exports = function(grunt) {
         },
 
         concat: {
+            options: {
+                sourceMap: true
+            },
             build: {
                 src: sources,
-                dest: 'release/nmouse.js'
+                dest: 'build/nmouse.concat.js'
             }
         },
 
@@ -54,11 +59,17 @@ module.exports = function(grunt) {
                     dead_code: true
                 }
             },
-            build: {
-                files: {
-                    'release/nmouse-min.js': ['release/nmouse.js']
-                }
 
+            build: {
+                options: {
+                    sourceMap: true,
+                    sourceMapIncludeSources: true,
+                    sourceMapIn: 'build/nmouse.concat.js.map',
+                    banner: banner
+                },
+                files: {
+                    'nmouse.js': ['build/nmouse.concat.js']
+                }
             }
         }
     });

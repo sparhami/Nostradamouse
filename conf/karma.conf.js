@@ -1,7 +1,7 @@
 module.exports = function(karma) {
     karma.set({
         // base path, that will be used to resolve files and exclude
-        basePath: '.',
+        basePath: '../',
 
         frameworks: ['mocha', 'chai-sinon'],
 
