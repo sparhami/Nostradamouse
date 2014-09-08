@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 
-    var banner = grunt.file.read('conf/banner.txt');
+    var pkg = grunt.file.readJSON('package.json');
     var sources = grunt.file.readJSON('conf/sources.json');
     var karmaFiles = []
     .concat('bower_components/platform/platform.js')
@@ -8,6 +8,8 @@ module.exports = function(grunt) {
     .concat('test/unit/**/*.js');
 
     grunt.initConfig({
+        pkg: pkg,
+
         karma: {
             options: {
                 configFile: 'conf/karma.conf.js',
@@ -65,16 +67,27 @@ module.exports = function(grunt) {
                     sourceMap: true,
                     sourceMapIncludeSources: true,
                     sourceMapIn: 'build/nmouse.concat.js.map',
-                    banner: banner
+                    banner: grunt.file.read('conf/banner.txt')
                 },
                 files: {
-                    'nmouse.js': ['build/nmouse.concat.js']
+                    'build/nmouse.js': ['build/nmouse.concat.js']
                 }
+            }
+        },
+
+        copy: {
+            dist: {
+                nonull: true,
+                expand: true,
+                cwd: 'build/',
+                src: ['nmouse.js', 'nmouse.js.map'],
+                dest: 'dist/'
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -82,6 +95,7 @@ module.exports = function(grunt) {
     grunt.registerTask('unit', ['karma:unit']);
     grunt.registerTask('bundle', ['concat:build', 'uglify:build']);
     grunt.registerTask('build', ['jshint:build', 'karma:build', 'bundle']);
+    grunt.registerTask('dist', ['bundle', 'copy:dist']);
 
     grunt.registerTask('default', ['build']);
 };
