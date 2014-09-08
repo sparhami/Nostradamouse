@@ -1,6 +1,5 @@
 .project
 build/
-dist/
 release/
 coverage/
 node_modules/
