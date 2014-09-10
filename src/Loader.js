@@ -7,19 +7,34 @@ Loader.prototype = {
         return this.loadedDefs[src];
     },
 
-    load: function(src, callback) {
+    fetch: function(src, type, callback) {
         if(this.get(src)) {
             return;
         }
 
-        var head = document.querySelector('head'),
+        var head = document.head,
             link = document.createElement('link');
 
         link.href = src;
-        link.rel = 'import';
+        link.rel = type;
         link.onload = callback;
         head.appendChild(link);
 
         this.loadedDefs[src] = link;
+    },
+
+    load: function(src, callback) {
+        this.fetch(src, 'import', callback);
+    },
+
+    prefetch: function(src, callback) {
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('GET', src, false);
+        xhr.send(null);
+
+        // would be nice to use <link rel="prefetch" />, but it isn't
+        // quite aggressive enough
+//         this.fetch(src, 'subresource', callback);
     }
 };
