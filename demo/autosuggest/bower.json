@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "lazy-autosuggest": "latest",
-    "polymer": "latest"
+    "polymer": "latest",
+    "Nostradamouse": "sparhami/Nostradamouse#~0.1.1"
   }
 }
