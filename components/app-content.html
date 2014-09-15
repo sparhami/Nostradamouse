@@ -1,0 +1,83 @@
+<polymer-element
+                 name="app-content"
+                 attributes="baseUrl defaultPage">
+    <template>
+        <div id="content"></div>
+    </template>
+    <script type="text/javascript">
+        (function() {
+            Polymer('app-content', {
+                attached: function() {
+                    this.links = {};
+
+                    this.handleHashchange();
+
+                    window.addEventListener('hashchange', this);
+
+                },
+
+                detached: function() {
+                    window.removeEventListener('hashchange', this);
+                },
+
+                handleEvent: function(event) {
+                    switch(event.type) {
+                        case 'hashchange':
+                            this.handleHashchange();
+                    }
+                },
+
+                handleHashchange: function() {
+                    this.showPage(this.getCurrentPath());
+                },
+
+                renderPage: function(link) {
+                    // Check for page being changed while one is being loaded
+                    if(this.currentPage !== link.href) {
+                        return;
+                    }
+
+                    var pageContent = document.importNode(link.import.body, true);
+
+                    this.$.content.innerHTML = '';
+                    this.$.content.appendChild(pageContent);
+                },
+
+                showPage: function(path) {
+                    var link = this.links[path] || this.createLink(path);
+
+                    this.currentPage = link.href;
+
+                    if(link && link.import) {
+                        this.renderPage(link);
+                    } else {
+                        link.onload = function() {
+                            this.renderPage(link);
+                        }.bind(this);
+
+                        this.links[path] = link;
+                    }
+                },
+
+                createLink: function(path) {
+                    var link = document.createElement('link');
+
+                    link.rel = 'import';
+                    link.href = this.getBaseUrl() + path;
+
+                    document.head.appendChild(link);
+
+                    return link;
+                },
+
+                getBaseUrl: function() {
+                    return (this.baseUrl || '') + '/';
+                },
+
+                getCurrentPath: function() {
+                    return window.location.hash.slice(1) || this.defaultPage;
+                }
+            });
+        })();
+    </script>
+</polymer-element>
