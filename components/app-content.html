@@ -1,19 +1,17 @@
 <polymer-element
                  name="app-content"
-                 attributes="baseUrl defaultPage">
+                 attributes="baseUrl defaultPage pageTitle">
     <template>
-        <div id="content"></div>
+        <content></content>
+        <div id="page"></div>
     </template>
     <script type="text/javascript">
         (function() {
             Polymer('app-content', {
                 attached: function() {
-                    this.links = {};
-
                     this.handleHashchange();
 
                     window.addEventListener('hashchange', this);
-
                 },
 
                 detached: function() {
@@ -32,31 +30,29 @@
                 },
 
                 renderPage: function(link) {
-                    // Check for page being changed while one is being loaded
-                    if(this.currentPage !== link.href) {
-                        return;
-                    }
+                    var body = link.import.body,
+                        title = link.import.querySelector('title');
 
-                    var pageContent = document.importNode(link.import.body, true);
-
-                    this.$.content.innerHTML = '';
-                    this.$.content.appendChild(pageContent);
+                    this.pageTitle = title ? title.textContent : link.path;
+                    this.$.page.innerHTML = body.innerHTML;
                 },
 
                 showPage: function(path) {
-                    var link = this.links[path] || this.createLink(path);
+                    var head = document.head,
+                        link = this.createLink(path);
 
                     this.currentPage = link.href;
 
-                    if(link && link.import) {
-                        this.renderPage(link);
-                    } else {
-                        link.onload = function() {
+                    link.onload = function() {
+                        // Check for page being changed while one is being loaded
+                        if(this.currentPage === link.href) {
                             this.renderPage(link);
-                        }.bind(this);
+                        }
 
-                        this.links[path] = link;
-                    }
+                        head.removeChild(link);
+                    }.bind(this);
+
+                    head.appendChild(link);
                 },
 
                 createLink: function(path) {
@@ -64,8 +60,6 @@
 
                     link.rel = 'import';
                     link.href = this.getBaseUrl() + path;
-
-                    document.head.appendChild(link);
 
                     return link;
                 },

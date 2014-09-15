@@ -1,5 +1,7 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <script src="bower_components/platform/platform.js"></script>
         <link rel="import"
               href="bower_components/polymer/polymer.html">
@@ -10,53 +12,30 @@
               href="bower_components/paper-elements/paper-elements.html">
 
         <link rel="import"
-              href="components/app-content.html"
+              href="components/app-page.html"
               async>
 
         <link rel="stylesheet"
               href="css/style.css">
     </head>
 
-
-    <core-drawer-panel id="app-drawer-panel">
-        <div id="app-drawer"
-             drawer>
-            <core-menu selected="0">
-                <core-submenu label="About">
-                    <core-item label="Why lazy loading?">
-                        <a href="#lazyLoading.html"></a>
-                    </core-item>
-                    <core-item label="Dependency Tracking">
-                        <a href="#dependencyTracking.html"></a>
-                    </core-item>
-                </core-submenu>
-                <core-submenu label="API">
-                    <core-item label="Element API"></core-item>
-                    <core-item label="JavaScript API"></core-item>
-                </core-submenu>
-            </core-menu>
-        </div>
-        <div main>
-            <core-header-panel id="header-panel"
-                               mode="waterfall-tall">
-                <div class="core-header animate tall">
-                    <paper-button id="app-drawer-reveal">Menu</paper-button>
-                    <header>waterfall-tall</header>
-                </div>
-                <app-content baseUrl="/pages"
-                             defaultPage="lazyLoading.html">
-
-                </app-content>
-            </core-header-panel>
-        </div>
-    </core-drawer-panel>
-
-
-    <script type="text/javascript">
-
-        document.getElementById('app-drawer-reveal').addEventListener('click', function() {
-            document.getElementById('app-drawer-panel').setAttribute('selected', 'drawer');
-        });
-
-    </script>
+    <app-page baseUrl="/pages"
+              defaultPage="lazyLoading.html">
+        <core-toolbar>Application</core-toolbar>
+        <core-menu>
+            <core-submenu label="About">
+                <core-item label="Why lazy loading?">
+                    <a href="#lazyLoading.html"></a>
+                </core-item>
+                <core-item label="Dependency Tracking"
+                           selected>
+                    <a href="#dependencyTracking.html"></a>
+                </core-item>
+            </core-submenu>
+            <core-submenu label="API">
+                <core-item label="Element API"></core-item>
+                <core-item label="JavaScript API"></core-item>
+            </core-submenu>
+        </core-menu>
+    </app-page>
 </html>

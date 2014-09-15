@@ -2,44 +2,6 @@
     box-sizing: border-box;
 }
 
-body, html {
-    border: 0;
-    margin: 0;
-}
-
-#header-panel {
-    width: 100%;
-    height: 100%;
-}
-
-.core-header {
-    font-size: 2em;
-
-    height: 5vmin;
-    padding: 5px 10px;
-
-    background-color: blue;
-    color: white;
-
-    transition: height 0.2s;
-}
-
-.core-header.tall {
-    height: 20vmin;
-}
-
-#app-content {
-    height: 2000px;
-}
-
-#app-drawer {
-    background-color: #eee;
-}
-
-#app-drawer-reveal {
-    display: none;
-}
-
-#app-drawer-panel[narrow] #app-drawer-reveal {
-    display: inline-block;
+core-submenu::shadow #submenu {
+  margin-left: 20px;
 }
