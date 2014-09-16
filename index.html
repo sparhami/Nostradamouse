@@ -12,30 +12,49 @@
               href="bower_components/paper-elements/paper-elements.html">
 
         <link rel="import"
-              href="components/app-page.html"
+              href="components/app-content.html"
+              async>
+
+        <link rel="import"
+              href="components/img-launcher.html"
               async>
 
         <link rel="stylesheet"
               href="css/style.css">
     </head>
 
-    <app-page baseUrl="/pages"
-              defaultPage="lazyLoading.html">
-        <core-toolbar>Application</core-toolbar>
-        <core-menu>
-            <core-submenu label="About">
-                <core-item label="Why lazy loading?">
-                    <a href="#lazyLoading.html"></a>
-                </core-item>
-                <core-item label="Dependency Tracking"
-                           selected>
-                    <a href="#dependencyTracking.html"></a>
-                </core-item>
-            </core-submenu>
-            <core-submenu label="API">
-                <core-item label="Element API"></core-item>
-                <core-item label="JavaScript API"></core-item>
-            </core-submenu>
-        </core-menu>
-    </app-page>
+    <body>
+        <template is="auto-binding">
+            <core-scaffold>
+                <core-header-panel navigation flex mode="seamed">
+                    <core-toolbar>Nostradamouse</core-toolbar>
+                    <core-menu>
+                        <core-submenu label="About">
+                            <core-item label="Why lazy loading?">
+                                <a href="#lazyLoading.html"></a>
+                            </core-item>
+                            <core-item label="Dependencies and Bundling"
+                                       selected>
+                                <a href="#dependenciesAndBundling.html"></a>
+                            </core-item>
+                        </core-submenu>
+                        <core-submenu label="API">
+                            <core-item label="Element API">
+                                <a href="#elementApi.html"></a>
+                            </core-item>
+                            <core-item label="JavaScript API">
+                                <a href="#javasScriptApi.html"></a>
+                            </core-item>
+                        </core-submenu>
+                    </core-menu>
+                </core-header-panel>
+                <div tool><h1 class="app-content-title">{{pageTitle}}</h1></div>
+
+                <app-content pageTitle="{{pageTitle}}"
+                             baseUrl="pages"
+                             defaultPage="dependenciesAndBundling.html">
+                </app-content>
+            </core-scaffold>
+        </template>
+    </body>
 </html>

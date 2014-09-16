@@ -2,6 +2,37 @@
     box-sizing: border-box;
 }
 
-core-submenu::shadow #submenu {
-  margin-left: 20px;
+aside,
+section {
+    float: left;
+}
+
+section {
+    min-width: 25em;
+}
+
+article,
+section,
+aside {
+    padding: 10px;
+}
+
+p {
+    max-width: 40em;
+}
+
+figure {
+    float: left;
+
+    max-width: 480px;
+}
+
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.app-content-title {
+    font-size: 1.4em;
 }

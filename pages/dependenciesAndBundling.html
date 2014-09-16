@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <title>Dependencies and Bundling</title>
+    </head>
+    <body>
+        <article class="group">
+            <section>
+                <h2>Why not bundle everything together?</h2>
+                <p>
+                    You might be tempted to simply gather the HTML imports that describe the custom elements you use in your site together and generate one (or more) bundles, import that and call it a day. For example, you might use <a href="https://github.com/Polymer/vulcanize">vulcanize</a> to generate a concatenated bundle. While this certainly makes your life a bit easier, it does come at a cost.
+                </p>
+                <p>
+                    Say that you have developed and pushed out your latest feature and you now have a bug report from one of your users. Being an astute developer, you have broken your page down into many components, each carrying on their own responsibilities. Since you separated the heck out of those concerns, changes are contained in handful of components. But since one file changed, your whole bundle needs to be redownloaded. Shortly after, your designer asks you to make some small adjustments based on user feedback. You now need to invalidate your user's cached files again.
+                </p>
+                <p>
+                    Does something like this sound familiar? The web, unlike traditional desktop applications, moves fast. Very fast. User interfaces that were in yesterday are out today. Techniques like <a href="http://en.wikipedia.org/wiki/A/B_testing">a/b testing</a> let us create compelling features for our real users (and not the ones we imagine as we develop our site). New features are requested all the time. All this rapid change and experimentation causes us to slaughter the cache that the browser is trying to help us with.
+                </p>
+                <p>
+                    So bundling comes at a cost. Not only does it impact your user's experience by taking longer to load the page, but also in increased bandwidth needed to serve all these files over and over again.
+                </p>
+            </section>
+
+            <aside>
+                <ul>
+                    <strong>Benefits of Bundling</strong>
+                    <li>Fewer round trips needed</li>
+                    <li>No need to worry about async loading</li>
+                </ul>
+                <ul>
+                    <strong>Disadvantages of Bundling</strong>
+                    <li>Hurts browser's caching</li>
+                    <li>Slower to load page</li>
+                    <li>More bandwidth required</li>
+                </ul>
+            </aside>
+
+            <section>
+                <h2>Benefits of bundling</h2>
+                <p>
+                    Bundling does come with benefits however. In order to load a component, several round trips to the server are not needed to discover the required dependencies. Furthermore, browsers will only open a handful of connections for downloading files, waiting for others to finish before starting the next. So even if we know all the dependencies upfront, it won't necessarily help. The two figures below illustrate this.
+                </p>
+
+                <div class="group">
+                    <figure>
+                        <img-launcher class="network-img" src="img/http-deps-unknown.png" title="HTTP with unknown dependencies"></img-launcher>
+                        <figcaption>Downloading a component via HTTP, 100ms latency - click to expand</figcaption>
+                    </figure>
+
+                    <figure>
+                        <img-launcher class="network-img" src="img/http-deps-known.png" title="HTTP with unknown dependencies"></img-launcher>
+                        <figcaption>Downloading a component via HTTP, all dependencies requested up front, 100ms latency - click to expand</figcaption>
+                    </figure>
+                </div>
+
+                <p>
+                    In the situation depicted above, knowning all the dependencies did not help since the browser only opened a limited number of connections at a given time.
+                </p>
+            </section>
+
+            <section>
+                <h2>SPDY to the rescue</h2>
+                <p>
+                    If you can use SPDY (<a href="http://caniuse.com/#feat=spdy">browsers supporting SPDY</a>), then the limited number of simultaneous connections should not be a problem. The figures below show the effect that using SPDY has. If we know our dependencies up front, we gain the advantage of bundling (fewer round trips), while still being able to retain files in cache and loading only the components we need.
+                </p>
+
+                <div class="group">
+                    <figure class="network-img">
+                        <img-launcher class="network-img" src="img/spdy-deps-unknown.png" title="HTTP with unknown dependencies"></img-launcher>
+                        <figcaption>Downloading a component via SPDY, 100ms latency - click to expand</figcaption>
+                    </figure>
+
+                    <figure class="network-img">
+                        <img-launcher class="network-img" src="img/spdy-deps-known.png" title="HTTP with unknown dependencies"></img-launcher>
+                        <figcaption>Downloading a component via SPDY, all dependencies requested up front, 100ms latency - click to expand</figcaption>
+                    </figure>
+                </div>
+
+                <p>
+                    When the dependencies are not know, SPDY does not provide much help in this case. While we are able to download seven component definitions at once, we are still limited by the number of roundtrips required. However, when we know what the dependencies are, it looks much better. Note that the last trip is needed to download the stylesheets and scripts references in the components themselves. Usually, components do not get too big, so including them inline would be preferred.
+                </p>
+            </section>
+        </article>
+    </body>
+</html>

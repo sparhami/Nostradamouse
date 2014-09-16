@@ -1,0 +1,34 @@
+<polymer-element
+                 name="img-launcher"
+                 attributes="src title"
+                 backgdrop="true">
+    <template>
+        <style>
+            :host .normal-img {
+                max-width: 100%;
+            }
+
+            :host paper-dialog::shadow #actions {
+                display: none;
+            }
+        </style>
+        <img class="normal-img"
+             src="{{src}}"
+             title="{{title}}"
+             on-tap="{{expand}}">
+
+        <paper-dialog opened="{{expanded}}"
+                      backdrop="true">
+            <img class="expanded-img"
+                 src="{{src}}"
+                 title="{{title}}">
+        </paper-dialog>
+    </template>
+    <script type="text/javascript">
+        Polymer('img-launcher', {
+            expand: function() {
+                this.expanded = true;
+            }
+        });
+    </script>
+</polymer-element>

@@ -3,75 +3,72 @@
                  attributes="baseUrl defaultPage pageTitle">
     <template>
         <content></content>
-        <div id="page"></div>
     </template>
     <script type="text/javascript">
-        (function() {
-            Polymer('app-content', {
-                attached: function() {
-                    this.handleHashchange();
+        Polymer('app-content', {
+            attached: function() {
+                this.handleHashchange();
 
-                    window.addEventListener('hashchange', this);
-                },
+                window.addEventListener('hashchange', this);
+            },
 
-                detached: function() {
-                    window.removeEventListener('hashchange', this);
-                },
+            detached: function() {
+                window.removeEventListener('hashchange', this);
+            },
 
-                handleEvent: function(event) {
-                    switch(event.type) {
-                        case 'hashchange':
-                            this.handleHashchange();
-                    }
-                },
-
-                handleHashchange: function() {
-                    this.showPage(this.getCurrentPath());
-                },
-
-                renderPage: function(link) {
-                    var body = link.import.body,
-                        title = link.import.querySelector('title');
-
-                    this.pageTitle = title ? title.textContent : link.path;
-                    this.$.page.innerHTML = body.innerHTML;
-                },
-
-                showPage: function(path) {
-                    var head = document.head,
-                        link = this.createLink(path);
-
-                    this.currentPage = link.href;
-
-                    link.onload = function() {
-                        // Check for page being changed while one is being loaded
-                        if(this.currentPage === link.href) {
-                            this.renderPage(link);
-                        }
-
-                        head.removeChild(link);
-                    }.bind(this);
-
-                    head.appendChild(link);
-                },
-
-                createLink: function(path) {
-                    var link = document.createElement('link');
-
-                    link.rel = 'import';
-                    link.href = this.getBaseUrl() + path;
-
-                    return link;
-                },
-
-                getBaseUrl: function() {
-                    return (this.baseUrl || '') + '/';
-                },
-
-                getCurrentPath: function() {
-                    return window.location.hash.slice(1) || this.defaultPage;
+            handleEvent: function(event) {
+                switch(event.type) {
+                    case 'hashchange':
+                        this.handleHashchange();
                 }
-            });
-        })();
+            },
+
+            handleHashchange: function() {
+                this.showPage(this.getCurrentPath());
+            },
+
+            renderPage: function(link) {
+                var body = link.import.body,
+                    title = link.import.querySelector('title');
+
+                this.pageTitle = title ? title.textContent : link.path;
+                this.innerHTML = body.innerHTML;
+            },
+
+            showPage: function(path) {
+                var head = document.head,
+                    link = this.createLink(path);
+
+                this.currentPage = link.href;
+
+                link.onload = function() {
+                    // Check for page being changed while one is being loaded
+                    if(this.currentPage === link.href) {
+                        this.renderPage(link);
+                    }
+
+                    head.removeChild(link);
+                }.bind(this);
+
+                head.appendChild(link);
+            },
+
+            createLink: function(path) {
+                var link = document.createElement('link');
+
+                link.rel = 'import';
+                link.href = this.getBaseUrl() + path;
+
+                return link;
+            },
+
+            getBaseUrl: function() {
+                return (this.baseUrl || '') + '/';
+            },
+
+            getCurrentPath: function() {
+                return window.location.hash.slice(1) || this.defaultPage;
+            }
+        });
     </script>
 </polymer-element>
