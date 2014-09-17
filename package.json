@@ -1,0 +1,11 @@
+{
+  "name": "Nostradamouse-docs",
+  "version": "0.0.0",
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt-vulcanize": "~0.4.1",
+    "grunt": "~0.4.5"
+  }
+}
