@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>Getting Started</title>
+    </head>
+    <body>
+        <article>
+            <section>
+                <h2>Download</h2>
+                <p>There are ways to download Nostradamouse</p>
+
+                <ol>
+                    <li><strong>Using <a href="http://bower.io/">bower</a>:</strong> <code>bower install --save sparhami/Nostradamouse</code></li>
+                    <li><strong>Directly from github:</strong>  <a href="https://github.com/sparhami/Nostradamouse/tree/master/dist">https://github.com/sparhami/Nostradamouse/tree/master/dist</a></li>
+                </ol>
+
+                <p>Additionally, you may need the platofrm Polyfill for older browsers</p>
+                <ol>
+                    <li><strong>Using bower:</strong>  <code>bower install --save Polymer/platform</code></li>
+                    <li><strong>Directly from github:</strong>  <a href="https://github.com/Polymer/platform">https://github.com/Polymer/platform</a></li>
+                </ol>
+            </section>
+            <section>
+                <h2>Include it in Your Page</h2>
+<pre class="prettyprint"><code>&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- 1. Load platform.js for custom element polyfill --&gt;
+        &lt;script src="bower_components/platform/platform.js"&gt;&lt;/script&gt;
+
+
+        &lt;!-- 2. Load Nostradamouse, no need to block page load however --&gt;
+        &lt;script src="bower_components/Nostradamouse/dist/nmouse.js" defer&gt;
+        &lt;/script&gt;
+        ...
+    &lt;/head&gt;
+...
+&lt;/html&gt;</code></pre>
+            </section>
+            <section>
+                <h2>Add Some Rules</h2>
+<pre class="prettyprint"><code>&lt;html&gt;
+    ...
+    &lt;body&gt;
+        ...
+        &lt;!-- nmouse rules --&gt;
+        &lt;nmouse-rule src="components/x-prettycode/x-prettycode.html"&gt;
+            &lt;nmouse-trigger type="added" tagName="x-prettycode"&gt;
+            &lt;/nmouse-trigger&gt;
+        &lt;/nmouse-rule&gt;
+        &lt;!-- end nmouse rules --&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </section>
+        </article>
+    </body>
+</html>

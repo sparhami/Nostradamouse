@@ -33,6 +33,7 @@
 
                 this.pageTitle = title ? title.textContent : link.path;
                 this.innerHTML = body.innerHTML;
+                this.fire('contentLoaded');
             },
 
             showPage: function(path) {

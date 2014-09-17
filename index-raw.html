@@ -6,6 +6,9 @@
         <link rel="import"
               href="bower_components/polymer/polymer.html">
 
+        <link href="css/desert.css" rel="stylesheet" async>
+        <script src="bower_components/google-code-prettify/bin/prettify.min.js" async></script>
+
         <link rel="import"
               href="bower_components/core-scaffold/core-scaffold.html">
         <link rel="import"
@@ -34,6 +37,9 @@
                     <core-toolbar>Nostradamouse</core-toolbar>
                     <core-menu>
                         <core-submenu label="About">
+                            <core-item label="Getting Started">
+                                <a href="#gettingStarted.html"></a>
+                            </core-item>
                             <core-item label="Why lazy loading?">
                                 <a href="#lazyLoading.html"></a>
                             </core-item>
@@ -56,9 +62,15 @@
 
                 <app-content pageTitle="{{pageTitle}}"
                              baseUrl="pages"
-                             defaultPage="dependenciesAndBundling.html">
+                             defaultPage="gettingStarted.html">
                 </app-content>
             </core-scaffold>
         </template>
     </body>
+
+    <script>
+        window.addEventListener('contentLoaded', function() {
+            prettyPrint();
+        });
+    </script>
 </html>
