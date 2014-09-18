@@ -17,17 +17,23 @@ NodeAddedHandler.prototype = {
     },
 
     observe: function(mutations) {
-        mutations.forEach(function(mutation) {
-            for(var i=0; i<mutation.addedNodes.length; i++) {
-                var node = mutation.addedNodes[i],
-                    trigger = this.triggers[node.tagName];
+        var loader = this.loader,
+            triggers = this.triggers;
 
-                if(trigger) {
-                    this.loader.load(trigger.src);
-                    delete this.triggers[node.tagName];
-                }
-            }
-        }, this);
+        mutations.forEach(function(mutation) {
+            var addedNodes = [].slice.call(mutation.addedNodes);
+
+            Utils
+                .flatMap(addedNodes, Utils.getDescendants)
+                .forEach(function(node) {
+                    var trigger = triggers[node.tagName];
+
+                    if(trigger) {
+                        loader.load(trigger.src);
+                        delete triggers[node.tagName];
+                    }
+                });
+        });
 
         this.setupObserver();
     },

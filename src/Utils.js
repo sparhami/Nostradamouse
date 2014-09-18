@@ -1,39 +1,48 @@
-var Utils = {
-    mix: function(dest, src) {
-        Object.keys(src).forEach(function(key) {
-            dest[key] = src[key];
-        });
+var Utils = (function() {
+    var slice = Array.prototype.slice;
 
-        return dest;
-    },
+    return {
+        flatMap: function(items, fn) {
+            return items.reduce(function(p, c) {
+                return p.concat(fn(c));
+            }, []);
+        },
 
-    extend: function(child, parent, protoFunctions) {
-        child.prototype = this.mix(Object.create(parent.prototype), protoFunctions || {});
-        child.prototype.constructor = child;
-    },
+        mix: function(dest, src) {
+            Object.keys(src).forEach(function(key) {
+                dest[key] = src[key];
+            });
 
-    getNode: function(thing) {
-        if(typeof thing === 'string') {
-            return document.querySelector(thing);
-        } else if(thing instanceof HTMLElement) {
-            return thing;
-        }
+            return dest;
+        },
 
-        if(DEBUG) {
-            throw Error('invalid thing specified');
-        }
-    },
+        extend: function(child, parent, protoFunctions) {
+            child.prototype = this.mix(Object.create(parent.prototype), protoFunctions || {});
+            child.prototype.constructor = child;
+        },
 
-    getAncestry: function(node) {
-        var nodes = [],
-            curNode;
-
-        for(curNode = node; curNode; curNode = curNode.parentElement) {
-            if(curNode instanceof HTMLElement) {
-                nodes.push(curNode);
+        getNode: function(thing) {
+            if(typeof thing === 'string') {
+                return document.querySelector(thing);
+            } else if(thing instanceof HTMLElement) {
+                return thing;
             }
-        }
 
-        return nodes;
-    }
-};
+            if(DEBUG) {
+                throw Error('invalid thing specified');
+            }
+        },
+
+        getAncestry: function _utilsGetAncestry(node) {
+            return node ? [node].concat(_utilsGetAncestry(node.parentElement)) : [];
+        },
+
+        getDescendants: function _utilsGetDescendants(node) {
+            var children = slice.call(node.children || []);
+
+            return Utils
+                .flatMap(children, _utilsGetDescendants)
+                .concat(node);
+        }
+    };
+})();

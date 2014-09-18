@@ -126,4 +126,44 @@ describe('Utils', function() {
             expect(new Child()).to.be.instanceOf(Parent);
         });
     });
+
+
+    describe('getDescendants', function() {
+        beforeEach(function() {
+            container.innerHTML = '<div class="someClass">\
+                <span>\
+                    <em>\
+                        <b></b>\
+                        <strong></strong>\
+                    </em>\
+                </span>\
+                <i>\
+                    <a></a>\
+                </i>\
+            </div>';
+        });
+
+        it('should return the matching node when present', function() {
+            var root = document.querySelector('.someClass'),
+                descendants = Utils.getDescendants(root),
+                strong = root.querySelector('strong'),
+                span = root.querySelector('span'),
+                em = root.querySelector('em'),
+                b = root.querySelector('b'),
+                a = root.querySelector('a'),
+                i = root.querySelector('i');
+
+
+            expect(descendants)
+                .to.include(a)
+                .to.include(b)
+                .to.include(i)
+                .to.include(em)
+                .to.include(span)
+                .to.include(root);
+
+        });
+
+    });
+
 });

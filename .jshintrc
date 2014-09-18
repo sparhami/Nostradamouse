@@ -1,5 +1,6 @@
 {
     "globals": {
         "DEBUG": true
-    }
+    },
+    "multistr": true
 }

@@ -94,7 +94,10 @@ describe('NodeProximityHandler', function() {
                                 tagName: 'X-BAR'
                             },
                             {
-                                tagName: 'X-FOO'
+                                tagName: 'DIV',
+                                children: [{
+                                    tagName: 'X-FOO'
+                                }]
                             }
                         ]
                     }
