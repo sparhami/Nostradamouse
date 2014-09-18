@@ -6,8 +6,12 @@
         <link rel="import"
               href="bower_components/polymer/polymer.html">
 
-        <link href="css/desert.css" rel="stylesheet" async>
-        <script src="bower_components/google-code-prettify/bin/prettify.min.js" async></script>
+<!--         <link rel="import"
+              href="bower_components/prism-js/prism-js.html"> -->
+
+        <script src="bower_components/Nostradamouse/dist/nmouse.js"
+                defer>
+        </script>
 
         <link rel="import"
               href="bower_components/core-scaffold/core-scaffold.html">
@@ -66,11 +70,12 @@
                 </app-content>
             </core-scaffold>
         </template>
-    </body>
 
-    <script>
-        window.addEventListener('contentLoaded', function() {
-            prettyPrint();
-        });
-    </script>
+        <!-- nmouse rules -->
+        <nmouse-rule src="bower_components/prism-js/prism-js.html">
+            <nmouse-trigger type="added" tagName="prism-js">
+            </nmouse-trigger>
+        </nmouse-rule>
+        <!-- end nmouse rules -->
+    </body>
 </html>

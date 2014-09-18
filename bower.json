@@ -16,6 +16,11 @@
   "dependencies": {
     "core-elements": "Polymer/core-elements#~0.4.0",
     "paper-elements": "Polymer/paper-elements#~0.4.0",
-    "google-code-prettify": "~1.0.3"
+    "prism-js": "~0.1.0",
+    "Nostradamouse": "sparhami/Nostradamouse#~0.1.2"
+  },
+  "resolutions": {
+    "polymer": ">=0.4.0 <1.0.0",
+    "core-input": ">=0.4.0 <1.0.0"
   }
 }

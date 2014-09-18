@@ -1,5 +1,5 @@
 * {
-    box-sizing: border-box;
+/*     box-sizing: border-box; */
 }
 
 .section-with-aside > * {
@@ -13,25 +13,19 @@ section {
 article,
 section,
 aside {
-    padding: 10px;
+    margin: 2em 1em;
 }
 
 p {
     max-width: 40em;
 }
 
-pre {
-    overflow-x: auto;
-
-    max-width: 60em;
-}
-
 figure {
     float: left;
 
-    margin-left: 20px;
-    margin-right: 20px;
-    max-width: 430px;
+    margin-left: 2em;
+    margin-right: 2em;
+    max-width: 44em;
 }
 
 .group:after {
@@ -44,9 +38,7 @@ figure {
     font-size: 1.4em;
 }
 
-pre.prettyprint {
-    padding: 0.8em 1.0em;
-
-    box-shadow: 0px 0px 10px -3px #333;
-    border-radius: 10px;
+prism-js {
+    font-size: 0.9em;
+    line-height: 1.3;
 }
