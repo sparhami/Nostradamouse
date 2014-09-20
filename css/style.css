@@ -1,5 +1,5 @@
 * {
-/*     box-sizing: border-box; */
+    box-sizing: border-box;
 }
 
 .section-with-aside > * {
@@ -16,7 +16,8 @@ aside {
     margin: 2em 1em;
 }
 
-p {
+p,
+prism-js {
     max-width: 40em;
 }
 
