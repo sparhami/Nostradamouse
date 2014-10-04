@@ -3,16 +3,20 @@
 describe('Loader', function() {
     var loader,
         head = document.querySelector('head'),
-        sandbox = sinon.sandbox.create();
+        headAppendChild = head.appendChild
 
     beforeEach(function() {
         loader = new Loader();
 
-        sinon.sandbox.stub(head, 'appendChild');
+        head.appendChild = function(node) {
+            node.onload();
+        };
+
+        sinon.spy(head, 'appendChild');
     });
 
     afterEach(function() {
-        sandbox.restore();
+        head.appendChild = headAppendChild;
     });
 
     describe('load', function() {
@@ -28,18 +32,26 @@ describe('Loader', function() {
                 });
         });
 
-        it('should load multiple sources', function() {
-            loader.load('some/src');
-            loader.load('some/other/src');
+        it('should load multiple sources', function(done) {
 
-            expect(head.appendChild).to.have.been.calledTwice;
+
+            loader.load('some/src');
+            loader.load('some/other/src').then(function() {
+                expect(head.appendChild).to.have.been.calledTwice;
+
+                done();
+            }, function() {
+                done();
+            });
         });
 
-        it('should not load the same source twice', function() {
+        it('should not load the same source twice', function(done) {
             loader.load('some/src');
-            loader.load('some/src');
+            loader.load('some/src').then(function() {
+                expect(head.appendChild).to.have.been.calledOnce;
 
-            expect(head.appendChild).to.have.been.calledOnce;
+                done();
+            });
         });
     });
 });
