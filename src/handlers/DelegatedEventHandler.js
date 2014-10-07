@@ -24,6 +24,10 @@ DelegatedEventHandler.prototype = {
     },
 
     handleEvent: function(e) {
+        if(e.target === window) {
+            return;
+        }
+
         this.getTrippedTriggers(e)
         .forEach(function(trigger) {
             this.loader.load(trigger.src);

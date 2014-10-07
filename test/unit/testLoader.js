@@ -3,7 +3,7 @@
 describe('Loader', function() {
     var loader,
         head = document.querySelector('head'),
-        headAppendChild = head.appendChild
+        headAppendChild = head.appendChild;
 
     beforeEach(function() {
         loader = new Loader();
