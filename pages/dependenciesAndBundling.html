@@ -17,7 +17,7 @@
                     </figure>
 
                     <figure>
-                        <img-launcher class="network-img" src="img/http-deps-known.png" title="HTTP with unknown dependencies"></img-launcher>
+                        <img-launcher class="network-img" src="img/http-deps-known.png" title="HTTP with known dependencies"></img-launcher>
                         <figcaption>Downloading a component via HTTP, all dependencies requested up front, 100ms latency - click to expand</figcaption>
                     </figure>
                 </div>
@@ -56,7 +56,7 @@
                         <li>Slower to load page</li>
                         <li>More bandwidth required</li>
                     </ul>
-            </aside>
+                </aside>
             </div>
 
 
@@ -69,18 +69,18 @@
 
                 <div class="group">
                     <figure class="network-img">
-                        <img-launcher class="network-img" src="img/spdy-deps-unknown.png" title="HTTP with unknown dependencies"></img-launcher>
+                        <img-launcher class="network-img" src="img/spdy-deps-unknown.png" title="SPDY with unknown dependencies"></img-launcher>
                         <figcaption>Downloading a component via SPDY, 100ms latency - click to expand</figcaption>
                     </figure>
 
                     <figure class="network-img">
-                        <img-launcher class="network-img" src="img/spdy-deps-known.png" title="HTTP with unknown dependencies"></img-launcher>
+                        <img-launcher class="network-img" src="img/spdy-deps-known.png" title="SPDY with known dependencies"></img-launcher>
                         <figcaption>Downloading a component via SPDY, all dependencies requested up front, 100ms latency - click to expand</figcaption>
                     </figure>
                 </div>
 
                 <p>
-                    When the dependencies are not know, SPDY does not provide much help in this case. While we are able to download seven component definitions at once, we are still limited by the number of roundtrips required. However, when we know what the dependencies are, it looks much better. Note that the last trip is needed to download the stylesheets and scripts references in the components themselves. Usually, components do not get too big, so including them inline would be preferred.
+                    When the dependencies are not known, SPDY does not provide much help in this case. While we are able to download more than 6 component definitions at once, we are still limited by the number of roundtrips required. However, when we know what the dependencies are, it looks much better. Note that the last trip is needed to download the stylesheets and scripts references in the components themselves. This can be avoided by inlining the required scripts and stylesheets either manually or as part of a build process.
                 </p>
             </section>
         </article>

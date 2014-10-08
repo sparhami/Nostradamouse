@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <title>Customizing Load</title>
+    </head>
+    <body>
+        <style>
+            .functionDefinition {
+                background-color: #f9f9f9;
+
+                border: 1px solid #333;
+                border-radius: 3px;
+                padding: 10px;
+            }
+        </style>
+        <article>
+            <div class="section-with-aside group">
+                <section>
+                    <h2>Load Hook</h2>
+                    <p>Nostradamouse exposes the function it uses to load elements and their dependencies to allow you to modify what is loaded or know when something finishes loading or has an error while loading.</p>
+                    <p>This functionality is exposes by the nmouse.loader.load function, which is called to load a resource when a rule is triggered or a dependency is required.<p>
+
+                </section>
+                <aside class="functionDefinition">
+                    <strong>nmouse.loader.load</strong>
+                    <div>@param {String} src The path to load</div>
+                    <div>@returns {Promise} A Promise that resolves/rejects when the resource has finished loading or hase had an error loading. Resolves with a <code>&lt;link&gt;</code> Element corresponding to the loaded resource.</div>
+                </aside>
+            </div>
+            <section>
+                <h2>Loading From a Custom Path</h2>
+                <p>You might want to load a custom element you are working on top of your site. The load hook can be used to facilitate this with a little bit of JavaScript. Some possible uses for this functionality might be:</p>
+                <ul>
+                    <li>Develop elements locally without needing to deploy for testing</li>
+                    <li>Load a new versions of components for end-to-end testing as part of a pipeline</li>
+                    <li>Serve out different versions (e.g. for A/B testing) from a CDN</li>
+                </ul>
+            </section>
+            <div class="section-with-aside group">
+                <section>
+                    <h2>Custom Path Code Example</h2>
+                    <p> The following code shows how you might use a URL parameter to load a given component from your local machine or any other host.</p>
+                    <prism-js theme="okaidia"
+                              language="javascript"
+                              unresolved>var queryParams = {};
+
+location.search
+    .substr(1)
+    .split("&")
+    .map(function(item) {
+        return item.split('=');
+    })
+    .forEach(function(keyVal) {
+        queryParams[keyVal[0]] = keyVal[1];
+    });
+
+// To load from localhost for components/my-component.html, add
+// components/my-component=http://localhost as a url parameter
+function getBasePath(src) {
+    var param = Object.keys(queryParams)
+        .find(function(param) {
+            return src.startsWith(param);
+        });
+
+    return param ? queryParams[param] + '/' : '';
+}
+
+var loader = nmouse.loader,
+    load = loader.load;
+
+loader.load = function(src) {
+    var path = getBasePath(src) + src;
+
+    // Return the result (a Promise) for anybody else hooking in
+    // that might want it
+    return load.call(loader, path);
+};</prism-js>
+            </section>
+                <aside class="note">
+                    You will want to add some additional logic to make sure it is safe to load a component from a given host to prevent a malicious link being given to a user.
+                </aside>
+            </div>
+
+        </article>
+    </body>
+</html>
