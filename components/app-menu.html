@@ -1,0 +1,59 @@
+<polymer-element name="app-menu">
+    <template>
+        <content></content>
+    </template>
+    <script>
+        (function() {
+            function isMenuItem(element) {
+                return element.matches('core-menu, core-submenu, core-item');
+            }
+
+            function setSelectedInParent(node) {
+                var parentElement = node && node.parentElement,
+                    index;
+
+                if(parentElement && isMenuItem(parentElement)) {
+                    index = [].slice.call(parentElement.children)
+                        .filter(isMenuItem)
+                        .indexOf(node);
+                    parentElement.setAttribute('selected', index);
+
+                    setSelectedInParent(parentElement);
+                }
+            }
+
+            function matchesLocation(node) {
+                return window.location.hash === node.getAttribute('href');
+            }
+
+            Polymer('app-menu', {
+                ready: function() {
+                    this.handleHashchange();
+
+                    window.addEventListener('hashchange', this);
+                },
+
+                detached: function() {
+                    window.removeEventListener('hashchange', this);
+                },
+
+                handleEvent: function(event) {
+                    switch(event.type) {
+                        case 'hashchange':
+                            this.handleHashchange();
+                    }
+                },
+
+                getItems: function() {
+                    return [].slice.call(this.querySelectorAll('a'));
+                },
+
+                handleHashchange: function() {
+                    var matchingItem = this.getItems().find(matchesLocation);
+
+                    setSelectedInParent(matchingItem);
+                }
+            });
+        })();
+    </script>
+</polymer-element>

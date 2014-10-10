@@ -3,8 +3,7 @@
 
 <polymer-element
                  name="img-launcher"
-                 attributes="src title"
-                 backgdrop="true">
+                 attributes="src title">
     <template>
         <style>
             :host .normal-img {
@@ -27,7 +26,7 @@
                  title="{{title}}">
         </paper-dialog>
     </template>
-    <script type="text/javascript">
+    <script>
         Polymer('img-launcher', {
             expand: function() {
                 this.expanded = true;

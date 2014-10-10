@@ -29,6 +29,9 @@
         <link rel="import"
               href="components/img-launcher.html"
               async>
+        <link rel="import"
+              href="components/app-menu.html"
+              async>
 
         <link rel="stylesheet"
               href="css/style.css">
@@ -39,39 +42,43 @@
             <core-scaffold>
                 <core-header-panel navigation flex mode="seamed">
                     <core-toolbar>Nostradamouse</core-toolbar>
-                    <core-menu>
-                        <core-submenu label="About">
-                            <core-item label="Getting Started">
-                                <a href="#gettingStarted.html"></a>
-                            </core-item>
-                            <core-item label="Why lazy loading?">
-                                <a href="#lazyLoading.html"></a>
-                            </core-item>
-                            <core-item label="Dependencies and Bundling"
-                                       selected>
-                                <a href="#dependenciesAndBundling.html"></a>
-                            </core-item>
-                        </core-submenu>
-                        <core-submenu label="API">
-                            <core-item label="Element API">
-                                <a href="#elementApi.html"></a>
-                            </core-item>
-                            <core-item label="JavaScript API">
-                                <a href="#javasScriptApi.html"></a>
-                            </core-item>
-                        </core-submenu>
-                        <core-submenu label="Advanced">
-                            <core-item label="Customizing Load">
-                                <a href="#loadHook.html"></a>
-                            </core-item>
-                        </core-submenu>
-                    </core-menu>
+                    <app-menu>
+                        <core-menu>
+                            <core-submenu label="About">
+                                <a class="item-content" href="#about.html"></a>
+                                <core-item label="Getting Started">
+                                    <a href="#gettingStarted.html"></a>
+                                </core-item>
+                                <core-item label="Why lazy loading?">
+                                    <a href="#lazyLoading.html"></a>
+                                </core-item>
+                                <core-item label="Dependencies and Bundling"
+                                           selected>
+                                    <a href="#dependenciesAndBundling.html"></a>
+                                </core-item>
+                            </core-submenu>
+                            <core-submenu label="API">
+                                <a class="item-content" href="#api.html"></a>
+                                <core-item label="Element API">
+                                    <a href="#elementApi.html"></a>
+                                </core-item>
+                                <core-item label="JavaScript API">
+                                    <a href="#javaScriptApi.html"></a>
+                                </core-item>
+                            </core-submenu>
+                            <core-submenu label="Advanced">
+                                <a class="item-content" href="#advanced.html"></a>
+                                <core-item label="Customizing Load">
+                                    <a href="#loadHook.html"></a>
+                                </core-item>
+                            </core-submenu>
+                        </core-menu>
+                    </app-menu>
                 </core-header-panel>
                 <div tool><h1 class="app-content-title">{{pageTitle}}</h1></div>
 
                 <app-content pageTitle="{{pageTitle}}"
-                             baseUrl="pages"
-                             defaultPage="gettingStarted.html">
+                             baseUrl="pages">
                 </app-content>
             </core-scaffold>
         </template>
@@ -82,5 +89,9 @@
             </nmouse-trigger>
         </nmouse-rule>
         <!-- end nmouse rules -->
+
+        <script>
+            window.location.hash = window.location.hash || '#about.html';
+        </script>
     </body>
 </html>
