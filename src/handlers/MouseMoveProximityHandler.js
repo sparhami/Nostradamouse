@@ -14,13 +14,13 @@ Utils.extend(MouseMoveProximityHandler, DelegatedEventHandler, {
 
     getTrippedTriggers: function(e) {
         var coords = {
-            x: e.clientX,
-            y: e.clientY
-        };
+                x: e.clientX,
+                y: e.clientY
+            };
 
         return this.triggers
         .filter(function(trigger) {
             return this.isNear(trigger.el.getBoundingClientRect(), coords, trigger.distance);
-        }, this);
+        }.bind(this));
     }
 });

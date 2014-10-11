@@ -17,7 +17,7 @@ DelegatedEventHandler.prototype = {
             return this.triggers.filter(function(trigger) {
                 return node.matches(trigger.selector);
             });
-        }, this)
+        }.bind(this))
         .reduce(function(p, c) {
             return p.concat(c);
         }, []);
@@ -32,7 +32,7 @@ DelegatedEventHandler.prototype = {
         .forEach(function(trigger) {
             this.loader.load(trigger.src);
             trigger.tripped = true;
-        }, this);
+        }.bind(this));
 
         this.triggers = this.triggers
         .filter(function(trigger) {
