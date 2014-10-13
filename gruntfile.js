@@ -83,19 +83,43 @@ module.exports = function(grunt) {
                 src: ['nmouse.js', 'nmouse.js.map'],
                 dest: 'dist/'
             }
+        },
+
+        connect: {
+            all: {
+                options: {
+                    port: 9001,
+                    base: '.'
+                }
+            }
+        },
+
+        mochaSelenium: {
+            options: {
+                useChaining: true
+            },
+            all: {
+                src: ['test/functional/spec/**/*.js'],
+                options: {
+                    browserName: 'chrome'
+                }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-mocha-selenium');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-connect');
 
     grunt.registerTask('unit', ['karma:unit']);
+    grunt.registerTask('functional', ['connect', 'mochaSelenium']);
     grunt.registerTask('bundle', ['concat:build', 'uglify:build']);
     grunt.registerTask('build', ['jshint:build', 'karma:build', 'bundle']);
-    grunt.registerTask('dist', ['bundle', 'copy:dist']);
+    grunt.registerTask('dist', ['build', 'functional', 'copy:dist']);
 
     grunt.registerTask('default', ['build']);
 };

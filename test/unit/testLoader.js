@@ -40,8 +40,6 @@ describe('Loader', function() {
                 expect(head.appendChild).to.have.been.calledTwice;
 
                 done();
-            }, function() {
-                done();
             });
         });
 
