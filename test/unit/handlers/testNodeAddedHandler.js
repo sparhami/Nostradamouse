@@ -44,10 +44,14 @@ describe('NodeProximityHandler', function() {
     });
 
     describe('addTrigger', function() {
-        var nodeAddedHandler;
+        var nodeAddedHandler,
+            loader = {
+                load: sinon.spy()
+            };
 
         beforeEach(function() {
-            nodeAddedHandler = new NodeAddedHandler();
+            loader.load.reset();
+            nodeAddedHandler = new NodeAddedHandler(loader);
         });
 
         it('should add a trigger and call setupObserver', function() {
@@ -61,16 +65,30 @@ describe('NodeProximityHandler', function() {
 
             expect(nodeAddedHandler.triggers['X-FOO']).to.equal(trigger);
         });
+
+        it('should call loader if the tag is already in the page', function() {
+            sandbox.stub(document, 'getElementsByTagName').withArgs('x-foo').returns([{}]);
+
+            var trigger = {
+                tagName: 'x-foo',
+                src: 'src'
+            };
+
+            nodeAddedHandler.addTrigger(trigger);
+
+            expect(nodeAddedHandler.triggers['X-FOO']).to.be.undefined;
+            expect(loader.load).to.have.been.calledWith('src');
+        });
     });
 
     describe('observe', function() {
         var nodeAddedHandler,
-            loader;
-
-        beforeEach(function() {
             loader = {
                 load: sinon.spy()
             };
+
+        beforeEach(function() {
+            loader.load.reset();
             nodeAddedHandler = new NodeAddedHandler(loader);
         });
 
