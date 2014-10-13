@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <script src="/bower_components/platform/platform.js"></script>
+        <script src="/build/nmouse.js"></script>
+    </head>
+
+    <style>
+        html, body {
+            width: 1000px;
+            height: 1000px;
+        }
+
+        #button {
+            width: 10px;
+            height: 10px;
+
+            position: relative;
+        }
+    </style>
+
+    <body>
+        <button id="button">Click Me!</button>
+
+        <nmouse-rule el="#button"
+                     src="trigger-src">
+            <nmouse-trigger type="proximity" distance="200"></nmouse-trigger>
+        </nmouse-rule>
+    </body>
+</html>
