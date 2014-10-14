@@ -39,8 +39,12 @@ NodeAddedHandler.prototype = {
     },
 
     addTrigger: function(params) {
-        // TODO - support one tagName mapping to multiple srcs
-        this.triggers[params.tagName.toUpperCase()] = params;
-        this.setupObserver();
+        if(document.getElementsByTagName(params.tagName).length) {
+            this.loader.load(params.src);
+        } else {
+            // TODO - support one tagName mapping to multiple srcs
+            this.triggers[params.tagName.toUpperCase()] = params;
+            this.setupObserver();
+        }
     }
 };

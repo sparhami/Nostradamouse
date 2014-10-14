@@ -23,14 +23,16 @@
               href="bower_components/core-menu/core-menu.html">
         <link rel="import"
               href="bower_components/core-menu/core-submenu.html">
+        <link rel="import"
+              href="bower_components/paper-button/paper-button.html">
 
         <link rel="import"
               href="components/app-content.html">
         <link rel="import"
-              href="components/img-launcher.html"
+              href="components/app-menu.html"
               async>
         <link rel="import"
-              href="components/app-menu.html"
+              href="components/img-launcher.html"
               async>
 
         <link rel="stylesheet"
@@ -45,31 +47,31 @@
                     <app-menu>
                         <core-menu>
                             <core-submenu label="About">
-                                <a class="item-content" href="#about.html"></a>
+                                <core-item label="Motivation">
+                                    <a href="#about/motivation.html"></a>
+                                </core-item>
                                 <core-item label="Getting Started">
-                                    <a href="#gettingStarted.html"></a>
+                                    <a href="#about/gettingStarted.html"></a>
                                 </core-item>
                                 <core-item label="Why lazy loading?">
-                                    <a href="#lazyLoading.html"></a>
+                                    <a href="#about/lazyLoading.html"></a>
                                 </core-item>
                                 <core-item label="Dependencies and Bundling"
                                            selected>
-                                    <a href="#dependenciesAndBundling.html"></a>
+                                    <a href="#about/dependenciesAndBundling.html"></a>
                                 </core-item>
                             </core-submenu>
                             <core-submenu label="API">
-                                <a class="item-content" href="#api.html"></a>
                                 <core-item label="Element API">
-                                    <a href="#elementApi.html"></a>
+                                    <a href="#api/elementApi.html"></a>
                                 </core-item>
                                 <core-item label="JavaScript API">
-                                    <a href="#javaScriptApi.html"></a>
+                                    <a href="#api/javaScriptApi.html"></a>
                                 </core-item>
                             </core-submenu>
                             <core-submenu label="Advanced">
-                                <a class="item-content" href="#advanced.html"></a>
                                 <core-item label="Customizing Load">
-                                    <a href="#loadHook.html"></a>
+                                    <a href="#advanced/loadHook.html"></a>
                                 </core-item>
                             </core-submenu>
                         </core-menu>
@@ -77,6 +79,7 @@
                 </core-header-panel>
                 <div tool><h1 class="app-content-title">{{pageTitle}}</h1></div>
 
+                <app-crumb></app-crumb>
                 <app-content pageTitle="{{pageTitle}}"
                              baseUrl="pages">
                 </app-content>
@@ -88,10 +91,14 @@
             <nmouse-trigger type="added" tagName="prism-js">
             </nmouse-trigger>
         </nmouse-rule>
+<!--         <nmouse-rule src="bower_components/paper-button/paper-button.html">
+            <nmouse-trigger type="added" tagName="paper-button">
+            </nmouse-trigger>
+        </nmouse-rule> -->
         <!-- end nmouse rules -->
 
         <script>
-            window.location.hash = window.location.hash || '#about.html';
+            window.location.hash = window.location.hash || '#about/motivation.html';
         </script>
     </body>
 </html>

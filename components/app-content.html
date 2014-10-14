@@ -7,20 +7,14 @@
     <script type="text/javascript">
         Polymer('app-content', {
             attached: function() {
-                this.handleHashchange();
+                this.hashchangeListener = this.handleHashchange.bind(this);
+                this.hashchangeListener();
 
-                window.addEventListener('hashchange', this);
+                window.addEventListener('hashchange', this.hashchangeListener);
             },
 
             detached: function() {
-                window.removeEventListener('hashchange', this);
-            },
-
-            handleEvent: function(event) {
-                switch(event.type) {
-                    case 'hashchange':
-                        this.handleHashchange();
-                }
+                window.removeEventListener('hashchange', this.hashchangeListener);
             },
 
             handleHashchange: function() {

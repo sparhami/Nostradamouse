@@ -17,18 +17,22 @@ DelegatedEventHandler.prototype = {
             return this.triggers.filter(function(trigger) {
                 return node.matches(trigger.selector);
             });
-        }, this)
+        }.bind(this))
         .reduce(function(p, c) {
             return p.concat(c);
         }, []);
     },
 
     handleEvent: function(e) {
+        if(e.target === window) {
+            return;
+        }
+
         this.getTrippedTriggers(e)
         .forEach(function(trigger) {
             this.loader.load(trigger.src);
             trigger.tripped = true;
-        }, this);
+        }.bind(this));
 
         this.triggers = this.triggers
         .filter(function(trigger) {

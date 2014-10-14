@@ -4,7 +4,7 @@ var NodeProximityHandler = function(loader) {
 
 NodeProximityHandler.prototype = {
     addTrigger: function(params) {
-        var _this = this,
+        var loader = this.loader,
             el = params.el,
             src = params.src,
             tripwire = document.createElement('div'),
@@ -19,7 +19,7 @@ NodeProximityHandler.prototype = {
 
         tripwire.className = 'nmouse-tripwire';
         tripwire.addEventListener('mouseover', function() {
-            _this.loader.load(src);
+            loader.load(src);
             el.removeChild(tripwire);
         });
 

@@ -1,25 +1,18 @@
 (function() {
-    var loader = new DepsTrackingLoader(new DepsStorage(localStorage));
-
-    var clickHandler = new DelegatedEventHandler('click', loader);
-    var focusHandler = new DelegatedEventHandler('focus', loader);
-    var mouseOverHandler = new DelegatedEventHandler('mouseover', loader);
-    var mouseMoveProximityHandler = new MouseMoveProximityHandler(loader);
-    var nodeProximityHandler = new NodeProximityHandler(loader);
-    var nodeAddedHandler = new NodeAddedHandler(loader);
+    var loader = new DepsTrackingLoader(new DepsStorage(localStorage)),
+        handlers = {};
 
     var proximityHandler = {
         addTrigger: function(params) {
-            var el = getNode(params.el),
-                style = getComputedStyle(el);
+            var style = getComputedStyle(params.el);
 
             if(style.overflow !== 'visible' || style.position === 'static') {
                 if(DEBUG) {
                     console.warn('Cannot create a simple trigger due to positioning or overflow, falling back to using mousemove.');
                 }
-                mouseMoveProximityTriggerHandler.addTrigger(params);
+                getHandler('mousemove-proximity').addTrigger(params);
             } else {
-                nodeProximityTriggerHandler.addTrigger(params);
+                getHandler('node-proximity').addTrigger(params);
             }
         }
     };
@@ -30,17 +23,32 @@
         });
     }
 
-    function prepareTrigger(trigger, params) {
-        var provider = {
-            'proximity': proximityHandler,
-            'focus': focusHandler,
-            'click': clickHandler,
-            'mouseover': mouseOverHandler,
-            'added': nodeAddedHandler
-        }[trigger.type];
+    function createHandler(type) {
+        switch(type) {
+            case 'added':
+                return new NodeAddedHandler(loader);
+            case 'proximity':
+                return proximityHandler;
+            case 'node-proximity':
+                return new NodeProximityHandler(loader);
+            case 'mousemove-proximity':
+                return new MouseMoveProximityHandler(loader);
+            default:
+                return new DelegatedEventHandler(type, loader);
+        }
+    }
 
-        provider.addTrigger({
-            el: params.el,
+    function getHandler(type) {
+        if(!handlers[type]) {
+            handlers[type] = createHandler(type);
+        }
+
+        return handlers[type];
+    }
+
+    function prepareTrigger(trigger, params) {
+        getHandler(trigger.type).addTrigger({
+            el: Utils.getNode(params.el),
             selector: params.selector,
             src: params.src,
             tagName: trigger.tagName,

@@ -7,19 +7,22 @@ Loader.prototype = {
         return this.loadedDefs[src];
     },
 
-    load: function(src, callback) {
-        if(this.get(src)) {
-            return;
+    load: function(src) {
+        if(!this.loadedDefs[src]) {
+            this.loadedDefs[src] = new Promise(function(resolve, reject) {
+                var head = document.querySelector('head'),
+                    link = document.createElement('link');
+
+                link.href = src;
+                link.rel = 'import';
+                link.onload = function() {
+                    resolve(link);
+                };
+                link.onerror = reject;
+                head.appendChild(link);
+            });
         }
 
-        var head = document.querySelector('head'),
-            link = document.createElement('link');
-
-        link.href = src;
-        link.rel = 'import';
-        link.onload = callback;
-        head.appendChild(link);
-
-        this.loadedDefs[src] = link;
+        return this.loadedDefs[src];
     }
 };

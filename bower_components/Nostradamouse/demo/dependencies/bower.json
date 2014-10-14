@@ -19,6 +19,6 @@
     "paper-button": "Polymer/paper-button#~0.4.0",
     "paper-dialog": "Polymer/paper-dialog#~0.4.0",
     "paper-toast": "Polymer/paper-toast#~0.4.0",
-    "Nostradamouse": "sparhami/Nostradamouse#~0.1.1"
+    "Nostradamouse": "sparhami/Nostradamouse#latest"
   }
 }

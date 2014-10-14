@@ -4,23 +4,27 @@ var DepsTrackingLoader = function(depsStorage) {
 };
 
 DepsTrackingLoader.prototype = {
-    load: function(src, callback) {
+    load: function(src) {
         var _this = this,
-            loader = this.loader;
+            loader = this.loader,
+            promise;
 
         if(loader.get(src)) {
-            return;
+            return loader.get(src);
         }
 
-        loader.load(src, function(e) {
-            _this.updateDeps(src, e.target.import);
+        promise = loader.load(src)
+            .then(function(link) {
+                _this.updateDeps(src, link.import);
 
-            if(callback) {
-                callback();
-            }
-        });
+                return link;
+            });
 
+        // Load deps afterwards so loading is blocked by max number of network
+        // connections being used to load deps for non-SPDY / HTTP/2 case
         this.loadDeps(src);
+
+        return promise;
     },
 
     updateDeps: function(src, doc) {
@@ -37,7 +41,7 @@ DepsTrackingLoader.prototype = {
          */
         deps.forEach(function(dep) {
             this.load(dep);
-        }, this);
+        }.bind(this));
     },
 
     loadDeps: function(src) {
@@ -45,6 +49,6 @@ DepsTrackingLoader.prototype = {
 
         deps.forEach(function(dep) {
             this.load(dep);
-        }, this);
+        }.bind(this));
     }
 };

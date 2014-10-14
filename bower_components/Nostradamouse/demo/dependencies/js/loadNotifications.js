@@ -3,7 +3,7 @@ var loader = nmouse.loader,
 
 loader.load = function(src) {
     load.call(this, 'bower_components/paper-toast/paper-toast.html');
-    load.call(this, src, function() {
+    load.call(this, src).then(function() {
         var toast = document.getElementById('componentLoadedToast');
 
         toast.setAttribute('text', 'Loaded ' + src);

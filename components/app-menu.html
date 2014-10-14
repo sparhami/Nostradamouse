@@ -8,48 +8,42 @@
                 return element.matches('core-menu, core-submenu, core-item');
             }
 
+            function isMenu(element) {
+                return element.matches('core-menu, core-submenu');
+            }
+
             function setSelectedInParent(node) {
                 var parentElement = node && node.parentElement,
                     index;
 
                 if(parentElement && isMenuItem(parentElement)) {
-                    index = [].slice.call(parentElement.children)
-                        .filter(isMenuItem)
-                        .indexOf(node);
-                    parentElement.setAttribute('selected', index);
+                    if(isMenu(parentElement)) {
+                        index = [].slice.call(parentElement.children)
+                            .filter(isMenuItem)
+                            .indexOf(node);
+
+                        parentElement.opened = true;
+                        parentElement.setAttribute('selected', index);
+                    }
 
                     setSelectedInParent(parentElement);
                 }
             }
 
-            function matchesLocation(node) {
-                return window.location.hash === node.getAttribute('href');
-            }
-
             Polymer('app-menu', {
                 ready: function() {
-                    this.handleHashchange();
+                    this.hashchangeListener = this.handleHashchange.bind(this);
+                    this.hashchangeListener();
 
-                    window.addEventListener('hashchange', this);
+                    window.addEventListener('hashchange', this.hashchangeListener);
                 },
 
                 detached: function() {
-                    window.removeEventListener('hashchange', this);
-                },
-
-                handleEvent: function(event) {
-                    switch(event.type) {
-                        case 'hashchange':
-                            this.handleHashchange();
-                    }
-                },
-
-                getItems: function() {
-                    return [].slice.call(this.querySelectorAll('a'));
+                    window.removeEventListener('hashchange', this.hashchangeListener);
                 },
 
                 handleHashchange: function() {
-                    var matchingItem = this.getItems().find(matchesLocation);
+                    var matchingItem = this.querySelector('a[href="' + location.hash + '"]');
 
                     setSelectedInParent(matchingItem);
                 }
