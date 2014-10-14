@@ -1,5 +1,6 @@
 var DepsTrackingLoader = function(depsStorage) {
     this.loader = new Loader();
+    this.originRegExp = new RegExp('^' + location.origin);
     this.depsStorage = depsStorage;
 };
 
@@ -27,11 +28,15 @@ DepsTrackingLoader.prototype = {
         return promise;
     },
 
+    getNormalizedHref: function(href) {
+        return href.replace(this.originRegExp, '');
+    },
+
     updateDeps: function(src, doc) {
         var links = [].slice.call(doc.querySelectorAll('link[rel="import"]')),
             deps = links.map(function(link) {
-                return link.href;
-            });
+                return this.getNormalizedHref(link.href);
+            }.bind(this));
 
         this.depsStorage.setDeps(src, deps);
         /*

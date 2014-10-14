@@ -51,6 +51,25 @@ describe('DepsTrackingLoader', function() {
             expect(depsStorage.setDeps).to.have.been.calledWith('src', ['one', 'two']);
         });
 
+        it('should persist relative dependencies as relative paths', function() {
+            var depsStorage = {
+                    setDeps: sinon.spy()
+                },
+                doc = {
+                    querySelectorAll: sinon.stub().returns([
+                        {
+                            href: location.origin + '/some/path'
+                        }
+                    ])
+                },
+                depsTrackingLoader = new DepsTrackingLoader(depsStorage);
+
+            depsTrackingLoader.load = sinon.stub();
+            depsTrackingLoader.updateDeps('src', doc);
+
+            expect(depsStorage.setDeps).to.have.been.calledWith('src', ['/some/path']);
+        });
+
         it('should call load for each of the dependencies', function() {
             var depsStorage = {
                     setDeps: sinon.spy()
