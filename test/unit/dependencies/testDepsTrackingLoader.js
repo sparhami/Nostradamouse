@@ -119,9 +119,9 @@ describe('DepsTrackingLoader', function() {
             );
 
             depsTrackingLoader.updateDeps = sinon.stub();
-            depsTrackingLoader.load('src').then(function() {
-                done();
-            });
+            depsTrackingLoader.load('src')
+                .then(function() {})
+                .then(done, done);
         });
 
         it('should call updateDeps after loading', function(done) {
@@ -139,11 +139,11 @@ describe('DepsTrackingLoader', function() {
             );
 
             depsTrackingLoader.updateDeps = sinon.stub();
-            depsTrackingLoader.load('src').then(function() {
-                expect(depsTrackingLoader.updateDeps).to.have.been.calledWith('src', doc);
-
-                done();
-            });
+            depsTrackingLoader.load('src')
+                .then(function() {
+                    expect(depsTrackingLoader.updateDeps).to.have.been.calledWith('src', doc);
+                })
+                .then(done, done);
         });
 
         it('should load all the deps for a given src', function() {

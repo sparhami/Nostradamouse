@@ -26,29 +26,29 @@ describe('CustomElementAPi', function() {
                 '</nmouse-rule>';
 
             // NOTE: This needs to be async when using platform.js with Firefox
-            setTimeout(function() {
-                expect(nmouse.prepare)
-                    .to.have.been.calledOnce
-                    .to.have.been.calledWithMatch({
-                        src: 'src',
-                        el: '#someId',
-                        selector: null,
-                        triggers: [
-                            {
-                                distance: null,
-                                tagName: null,
-                                type: 'focus'
-                            },
-                            {
-                                distance: null,
-                                tagName: null,
-                                type: 'click'
-                            }
-                        ]
-                    });
-
-                done();
-            }, 0);
+            Promise.resolve()
+                .then(function() {
+                    expect(nmouse.prepare)
+                        .to.have.been.calledOnce
+                        .to.have.been.calledWithMatch({
+                            src: 'src',
+                            el: '#someId',
+                            selector: null,
+                            triggers: [
+                                {
+                                    distance: null,
+                                    tagName: null,
+                                    type: 'focus'
+                                },
+                                {
+                                    distance: null,
+                                    tagName: null,
+                                    type: 'click'
+                                }
+                            ]
+                        });
+                })
+                .then(done, done);
         });
 
         it('should call prepare for each rule', function(done) {
@@ -57,24 +57,24 @@ describe('CustomElementAPi', function() {
                 '<nmouse-rule src="src2" el="#someId2"></nmouse-rule>';
 
             // NOTE: This needs to be async when using platform.js with Firefox
-            setTimeout(function() {
-                expect(nmouse.prepare).to.have.been
-                    .calledTwice
-                    .calledWithMatch({
-                        src: 'src',
-                        el: '#someId',
-                        selector: null,
-                        triggers: []
-                    })
-                    .calledWithMatch({
-                        src: 'src2',
-                        el: '#someId2',
-                        selector: null,
-                        triggers: []
-                    });
-
-                done();
-            }, 0);
+            Promise.resolve()
+                .then(function() {
+                    expect(nmouse.prepare).to.have.been
+                        .calledTwice
+                        .calledWithMatch({
+                            src: 'src',
+                            el: '#someId',
+                            selector: null,
+                            triggers: []
+                        })
+                        .calledWithMatch({
+                            src: 'src2',
+                            el: '#someId2',
+                            selector: null,
+                            triggers: []
+                        });
+                })
+                .then(done, done);
         });
     });
 });

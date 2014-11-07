@@ -36,20 +36,20 @@ describe('Loader', function() {
 
 
             loader.load('some/src');
-            loader.load('some/other/src').then(function() {
-                expect(head.appendChild).to.have.been.calledTwice;
-
-                done();
-            });
+            loader.load('some/other/src')
+                .then(function() {
+                    expect(head.appendChild).to.have.been.calledTwice;
+                })
+                .then(done, done);
         });
 
         it('should not load the same source twice', function(done) {
             loader.load('some/src');
-            loader.load('some/src').then(function() {
-                expect(head.appendChild).to.have.been.calledOnce;
-
-                done();
-            });
+            loader.load('some/src')
+                .then(function() {
+                    expect(head.appendChild).to.have.been.calledOnce;
+                })
+                .then(done, done);
         });
     });
 });
