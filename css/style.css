@@ -84,20 +84,6 @@ paper-button {
     font-weight: bold;
 }
 
-app-crumb {
-    display: block;
-
-    margin: 10px 10px;
-}
-
-app-crumb::shadow .crumb:not(:last-of-type):after {
-    content: ">";
-    vertical-align: middle;
-    margin: 0 5px;
-
-    pointer-events: none;
-}
-
-app-crumb::shadow .crumb:hover {
-    background-color: #fff;
+core-item a {
+    outline: none;
 }

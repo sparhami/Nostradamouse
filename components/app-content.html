@@ -23,9 +23,9 @@
 
             renderPage: function(link) {
                 var body = link.import.body,
-                    title = link.import.querySelector('title');
+                    title = body.querySelector('title') || link.import.querySelector('title');
 
-                this.pageTitle = title ? title.textContent : link.path;
+                this.pageTitle = title.textContent;
                 this.innerHTML = body.innerHTML;
             },
 
