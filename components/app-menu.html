@@ -30,7 +30,7 @@
                 }
             }
 
-            Polymer('app-menu', {
+            Polymer({
                 ready: function() {
                     this.hashchangeListener = this.handleHashchange.bind(this);
                     this.hashchangeListener();

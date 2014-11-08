@@ -1,11 +1,10 @@
-<polymer-element
-                 name="app-content"
+<polymer-element name="app-content"
                  attributes="baseUrl pageTitle">
     <template>
         <content></content>
     </template>
-    <script type="text/javascript">
-        Polymer('app-content', {
+    <script>
+        Polymer({
             attached: function() {
                 this.hashchangeListener = this.handleHashchange.bind(this);
                 this.hashchangeListener();
