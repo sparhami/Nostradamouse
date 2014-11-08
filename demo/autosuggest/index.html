@@ -16,11 +16,6 @@
               href="css/style.css">
     </head>
     <body>
-        <x-stateautosuggest>
-            <input type="text"
-                   placeholder="Search" />
-        </x-stateautosuggest>
-
         <!--  nmouse rules -->
         <nmouse-rule selector="x-stateautosuggest"
                      src="components/x-stateautosuggest/x-stateautosuggest.html"
@@ -29,5 +24,22 @@
             <nmouse-trigger type="mouseover"></nmouse-trigger>
         </nmouse-rule>
         <!--  end nmouse rules -->
+        
+        <x-stateautosuggest>
+            <input type="text"
+                   placeholder="Search" />
+        </x-stateautosuggest>
+        
+        <div style="width: 30em">
+            <p>
+                On clicking (or focusing) the input box, the definition for the &lt;x-stateautosuggest&gt; is loaded. The <a href="https://github.com/sparhami/lazy-autosuggest">&lt;lazy-autosuggest&gt;</a> component that it uses makes sure to have the correct state (e.g. open, fetch suggestions based on the input value) when the component definition is loaded and the elmeent is upgraded.
+            </p>
+            <p>
+                By passing the &lt;input type="text" /&gt; component to the &lt;x-stateautosuggest&gt; component (which in turn passes it down to the &lt;lazy-autosuggest&gt;, the element can appear on the screen as soon as the page is loaded.
+            </p>
+            <p>
+                The suggestions (U.S. states and capitols) are contained within the &lt;x-stateautosuggest&gt; component, but there is a 100ms delay before showing them so that you might get a better feel for how responsive the component will be when the user firsts loads the page and starts typing into it.
+            </p>
+        </div>
     </body>
 </html>

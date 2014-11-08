@@ -12,8 +12,8 @@
                 'Phoenix', 'Arizona',
                 'Little Rock', 'Arkansas',
                 'Sacramento', 'California',
-                'Denver    Colorado',
-                'Hartford',        'Connecticut',
+                'Denver', 'Colorado',
+                'Hartford', 'Connecticut',
                 'Dover', 'Delaware',
                 'Tallahassee', 'Florida',
                 'Atlanta', 'Georgia',
@@ -68,11 +68,14 @@
                 updateSuggestions: function(e) {
                     var lowercaseValue = e.detail.value.toLowerCase();
 
-                    this.items = items
-                        .filter(function(item) {
-                            return item.toLowerCase().indexOf(lowercaseValue) === 0;
-                        })
-                        .slice(0, 5);
+                    // simulate some delay for getting suggestions 
+                    window.setTimeout(function() {
+                        this.items = items
+                            .filter(function(item) {
+                                return item.toLowerCase().indexOf(lowercaseValue) === 0;
+                            })
+                            .slice(0, 5);
+                    }.bind(this), 100);
                 }
             });
         })();
