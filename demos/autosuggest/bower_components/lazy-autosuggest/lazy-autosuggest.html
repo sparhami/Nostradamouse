@@ -1,0 +1,208 @@
+<polymer-element name="lazy-autosuggest"
+                 attributes="opened"
+                 on-keydown="{{open}}">
+    <template>
+        <style>
+            :host {
+                position: relative;
+            }
+
+            :host > ul {
+                margin: 0;
+                padding: 0;
+                list-style-type: none;
+            }
+
+            :host > .dropdown {
+                position: absolute;
+                left: 0;
+                right: 0;
+            }
+
+            :host > .overlay {
+                position: fixed;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+            }
+
+            :host .inputHint {
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                background-color: transparent;
+
+                opacity: 0.6;
+                pointer-events: none;
+            }
+        </style>
+        <span id="inputContainer">
+            <content on-click="{{handleClick}}"
+                     on-input="{{handleInput}}"
+                     on-keydown="{{handleKeydown}}">
+            </content>
+            <input class="inputHint"
+                   type="text"
+                   disabled
+                   value="{{hintText}}" />
+        </span>
+
+        <template if="{{opened && items.length && value}}">
+            <div class="overlay"
+                 on-click="{{close}}"></div>
+            <ul class="dropdown">
+                <template repeat="{{item, index in items}}">
+                    <li class="{{ { selected: index == selectedIndex } | tokenList }}">
+                        {{item}}
+                    </li>
+                </template>
+            </ul>
+        </template>
+
+    </template>
+    <script type="text/javascript">
+        (function() {
+            'use strict';
+
+            Polymer('lazy-autosuggest', {
+                publish: {
+                    opened: false,
+
+                    items: [],
+
+                    selectedIndex: 0,
+
+                    value: '',
+
+                    hintText: ''
+                },
+
+                open: function() {
+                    this.opened = true;
+                },
+
+                close: function() {
+                    this.opened = false;
+                },
+
+                selectPrevious: function() {
+                    this.selectedIndex = Math.max(this.selectedIndex - 1, 0);
+                },
+
+                selectNext: function() {
+                    this.selectedIndex = Math.min(this.selectedIndex + 1, this.items.length - 1);
+                },
+
+                selectAdjacent: function(next) {
+                    if(next) {
+                        this.selectNext();
+                    } else {
+                        this.selectPrevious();
+                    }
+                },
+
+                domReady: function() {
+                    var input = this.querySelector('input');
+
+                    if(!input) {
+                        throw Error('Must provide an input to lazy-autosuggest.');
+                    }
+
+                    if(input.value) {
+                        this.value = input.value;
+                        this.fireInputChange();
+                    }
+
+                    if(input === document.activeElement) {
+                        this.open();
+                    }
+
+                    this.input = input;
+                },
+
+                updateHint: function() {
+                    var item = this.items[this.selectedIndex],
+                        inputHint = this.$.inputHint,
+                        startsWithValue = item && item.toLowerCase().indexOf(this.value.toLowerCase()) === 0;
+
+                    if(this.opened && this.value && startsWithValue) {
+                        this.hintText = this.value + item.substring(this.value.length);
+                    } else {
+                        this.hintText = '';
+                    }
+                },
+
+                openedChanged: function(newVal, oldVal) {
+                    this.updateHint();
+                },
+
+                valueChanged: function() {
+                    this.updateHint();
+                },
+
+                selectedIndexChanged: function() {
+                    this.updateHint();
+                },
+
+                fireInputChange: function() {
+                    this.fire('inputChange', {
+                        value: this.value
+                    });
+                },
+
+                handleInput: function(e) {
+                    this.value = e.target.value;
+                    this.selectedIndex = 0;
+                    this.open();
+                    this.fireInputChange();
+
+                    e.stopPropagation();
+                },
+
+                handleTab: function(e) {
+                    var item = this.items[this.selectedIndex],
+                        input = this.input;
+
+                    if(this.hintText) {
+                        this.value = input.value = item;
+                        this.fireInputChange();
+                        e.preventDefault();
+                    }
+                },
+
+                handleKeydown: function(e) {
+                    var handled = false;
+
+                    switch(e.keyCode) {
+                        case 9: // tab
+                            this.handleTab(e);
+                            handled = true;
+                            break;
+                        case 13: //enter
+                            break;
+                        case 27: // esc
+                            this.close(e);
+                            handled = true;
+                            break;
+                        case 38: // up arrow
+                        case 40: // down arrow
+                            this.selectAdjacent(e.keyCode === 40);
+                            handled = true;
+                            break;
+                    }
+
+                    if(handled) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                },
+
+                handleClick: function() {
+                    this.open();
+                }
+            });
+        })();
+    </script>
+</polymer-element>

@@ -1,0 +1,14 @@
+{
+    "name": "lazy-autosuggest",
+    "version": "0.0.1",
+    "description": "A Polymer element for showing suggestions based on a user's input",
+    "author": "Sepand Parhami",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sparhami/lazy-autosuggest"
+    },
+    "bugs": {
+        "url": "https://github.com/sparhami/lazy-autosuggest/issues"
+    }
+}

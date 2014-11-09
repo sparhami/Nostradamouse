@@ -1,0 +1,35 @@
+{
+  "name": "lazy-autosuggest",
+  "version": "0.0.5",
+  "authors": [
+    "sparhami <sepandparhami@gmail.com>"
+  ],
+  "description": "A auto suggestion component written in Polymer",
+  "keywords": [
+    "polymer",
+    "web-components",
+    "autosuggest"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/sparhami/lazy-autosuggest",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "latest"
+  },
+  "_release": "0.0.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.5",
+    "commit": "0428a1df5039404f5425f08db75e65f3854c4945"
+  },
+  "_source": "git://github.com/sparhami/lazy-autosuggest.git",
+  "_target": "*",
+  "_originalSource": "lazy-autosuggest"
+}

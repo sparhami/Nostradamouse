@@ -1,0 +1,8 @@
+To run this demo, perform the following steps:
+
+1: npm install
+2. bower install
+3. node server.js
+4. Go to https://localhost:8443 (for SPDY) or http://localhost:8080 (for HTTP)
+
+You can change the latency defined in server.json to see how things look with different delays

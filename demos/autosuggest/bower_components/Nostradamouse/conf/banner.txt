@@ -1,0 +1,5 @@
+/*
+ * Nostradamouse <%= pkg.version %>
+ * Copyright (c) <%= grunt.template.today("yyyy") %> Sepand Parhami
+ * Licensed under the MIT license
+ */

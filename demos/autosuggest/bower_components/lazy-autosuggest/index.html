@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>&lt;lazy-autosuggest&gt;</title>
+
+        <!-- Polymer and platform.js (needed by Polymer) -->
+        <script src="bower_components/platform/platform.js"></script>
+        <link rel="import" href="bower_components/polymer/polymer.html">
+
+        <!-- No need to load this yet - after all, our user may never even use this! -->
+        <!-- <link rel="import" href="src/lazy-autosuggest.html"> -->
+
+        <style>
+            
+            lazy-autosuggest input,
+            lazy-autosuggest::shadow .dropdown,
+            lazy-autosuggest::shadow .inputHint {
+                border: 1px solid #aaa;
+            }
+            
+            lazy-autosuggest::shadow .dropdown {
+                background-color: white;
+            }
+
+            lazy-autosuggest::shadow .selected {
+                background-color: #e2e2e2;
+            }
+        </style>
+    </head>
+    <body>
+        <h1><a href="http://github.com/sparhami/lazy-autosuggest">&lt;lazy-autosuggest&gt;</a></h1>
+        <h2>A Polymer autosuggest element</h2>
+        <p>
+            The element definition is not loaded on page load. Instead, this
+            page will load the definition when you hover (or focus) the input
+            box using JavaScript. The element will make sure to open and cause
+            the appropriate suggestions event if there is something typed prior
+            to the element being upgraded.
+        </p>
+        <p>
+            There is an additional latency of <strong>300ms</strong> simulated by delaying
+            the load of the &lt;lazy-autosuggest&gt; compontent so that you can get a
+            feel for how it acts in an non-ideal environment.
+        </p>
+        <p>
+            This sample page simply uses the following array of items for suggestions:
+                [
+                    'one',
+                    'two',
+                    'three',
+                    'four',
+                    'five',
+                    'six',
+                    'seven',
+                    'eight',
+                    'nine',
+                    'ten',
+                    'twenty',
+                    'thirty',
+                    'forty',
+                    'fifty',
+                    'sixty',
+                    'seventy',
+                    'eighty',
+                    'ninty',
+                    'one hundred',
+                    'two hundered',
+                    'three hundred'
+                ]
+        </p>
+        <p>
+            <em>Note:</em> This page may or may not work on Firefox. If you have issues,
+            please try using Chrome.
+        </p>
+
+        <lazy-autosuggest id="autosuggest">
+            <input type="text" />
+        </lazy-autosuggest>
+
+        <script>
+            (function() {
+                var ADDITIONAL_LATENCY = 300,
+                    MAX_ITEMS = 3,
+                    autosuggestInput = document.querySelector('#autosuggest input'),
+                    items = [
+                        'one',
+                        'two',
+                        'three',
+                        'four',
+                        'five',
+                        'six',
+                        'seven',
+                        'eight',
+                        'nine',
+                        'ten',
+                        'twenty',
+                        'thirty',
+                        'forty',
+                        'fifty',
+                        'sixty',
+                        'seventy',
+                        'eighty',
+                        'ninty',
+                        'one hundred',
+                        'two hundered',
+                        'three hundred'
+                    ];
+
+                autosuggest.addEventListener('inputChange', function(e) {
+                    var lowercaseValue = e.detail.value.toLowerCase();
+
+                    autosuggest.items = items
+                        .filter(function(value) {
+                            return value.toLowerCase().indexOf(lowercaseValue) === 0;
+                        })
+                        .slice(0, MAX_ITEMS);
+                });
+
+                function loadDef() {
+                    autosuggestInput.removeEventListener('mouseenter', loadDef);
+                    autosuggestInput.removeEventListener('focus', loadDef);
+
+                    // Simulate a loading latency of 300ms
+                    setTimeout(function() {
+                        var link = document.createElement('link');
+                        link.rel = 'import';
+                        link.href = 'lazy-autosuggest.html';
+
+                        document.querySelector('head').appendChild(link);
+                    }, ADDITIONAL_LATENCY);
+                }
+
+                autosuggestInput.addEventListener('mouseenter', loadDef);
+                autosuggestInput.addEventListener('focus', loadDef);
+            })();
+        </script>
+    </body>
+</html>

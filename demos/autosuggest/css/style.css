@@ -1,0 +1,40 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+    margin: 20px;
+}
+
+#settingsBtn {
+    float: right;
+}
+
+x-stateautosuggest {
+    display: block;
+    
+    width: 600px;
+    height: 20px;
+    max-width: 50%;
+}
+
+x-stateautosuggest input,
+x-stateautosuggest::shadow input {
+    box-sizing: border-box;
+    border: none;
+    margin: 0;
+    width: 100%;
+    
+    padding-left: 6px;
+}
+
+x-stateautosuggest,
+x-stateautosuggest::shadow .dropdown {
+    border: 1px solid #aaa;
+    background-color: white;
+}
+
+x-stateautosuggest::shadow .selected {
+    background-color: #e2e2e2;
+}

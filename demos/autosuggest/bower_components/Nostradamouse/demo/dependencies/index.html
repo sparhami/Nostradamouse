@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0">
+        <title>Lazy</title>
+
+        <script src="bower_components/platform/platform.js"></script>
+        <script src="bower_components/Nostradamouse/dist/nmouse.js" defer></script>
+        <link rel="import"
+              href="bower_components/polymer/polymer.html">
+
+        <script src="js/index.js" defer></script>
+        <script src="js/loadNotifications.js" defer></script>
+
+        <style type="text/css">
+            html, body {
+                height: 100%;
+            }
+
+            body {
+                overflow: hidden;
+                margin: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="settingsBtn">Settings</button>
+
+        <x-settings id="settingsDialog"></x-settings>
+
+        <div style="width: 30em">
+            <p>
+                When clicking the 'settings' button above, Nostradamouse will
+                load the definition for x-settings. On the first page load, it will
+                just load x-settings.
+            </p>
+            <p>
+                On the second load, it will use the dependency information from the
+                previous page load to request the dependencies upfront without having
+                to wait for a round trip to discover them.
+            </p>
+            <p>
+                In order to render the settings dialog, there are four round trips
+                that need to be made in order to load all the dependencies needed.
+                With the dependency information being cached, it can be done in two.
+                The final round trip is needed to get the script and style
+                dependencies used by any components.
+            </p>
+            <p>
+                If you look in your dev tools, you may notice that while all the
+                dependencies are requested up front, only approximately 6 are
+                retrieved at any given time. If you use SPDY to serve the page,
+                then all the dependencies will be loaded in parallel.
+            </p>
+            <p>
+                If you do a localStorage.clear() in your dev tools, you can
+                reload the page again to compare how the loading looks like
+                without the dependencies cached. You may also find it useful
+                to inject artificial latency on your network requests to get
+                a feel for how the depenecy caching will be useful when a user
+                has a poor network connection.
+            </p>
+        </div>
+
+        <paper-toast id="componentLoadedToast" text="custom element loaded"></paper-toast>
+
+        <!--  nmouse rules -->
+        <nmouse-rule selector="#settingsBtn"
+                     src="components/x-settings/x-settings.html">
+            <nmouse-trigger type="mouseover"></nmouse-trigger>
+            <nmouse-trigger type="focus"></nmouse-trigger>
+        </nmouse-rule>
+        <!--  end nmouse rules -->
+    </body>
+</html>

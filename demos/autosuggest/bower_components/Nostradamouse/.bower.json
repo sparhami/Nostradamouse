@@ -1,0 +1,34 @@
+{
+  "name": "Nostradamouse",
+  "version": "0.1.4",
+  "authors": [
+    "sparhami <sepandparhami@gmail.com>"
+  ],
+  "description": "Helps you lazy-load web components",
+  "keywords": [
+    "lazy",
+    "webcomponents"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "platform": "Polymer/platform#latest"
+  },
+  "homepage": "https://github.com/sparhami/Nostradamouse",
+  "_release": "0.1.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.4",
+    "commit": "23e8090726a96d705cff9ed3c3346085333163b3"
+  },
+  "_source": "git://github.com/sparhami/Nostradamouse.git",
+  "_target": "*",
+  "_originalSource": "sparhami/Nostradamouse"
+}
