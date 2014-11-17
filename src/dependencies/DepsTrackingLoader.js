@@ -6,8 +6,7 @@ var DepsTrackingLoader = function(depsStorage) {
 
 DepsTrackingLoader.prototype = {
     load: function(src) {
-        var _this = this,
-            loader = this.loader,
+        var loader = this.loader,
             promise;
 
         if(loader.get(src)) {
@@ -16,10 +15,10 @@ DepsTrackingLoader.prototype = {
 
         promise = loader.load(src)
             .then(function(link) {
-                _this.updateDeps(src, link.import);
+                this.updateDeps(src, link.import);
 
                 return link;
-            });
+            }.bind(this));
 
         // Load deps afterwards so loading is blocked by max number of network
         // connections being used to load deps for non-SPDY / HTTP/2 case

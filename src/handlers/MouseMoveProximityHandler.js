@@ -19,8 +19,8 @@ Utils.extend(MouseMoveProximityHandler, DelegatedEventHandler, {
             };
 
         return this.triggers
-        .filter(function(trigger) {
-            return this.isNear(trigger.el.getBoundingClientRect(), coords, trigger.distance);
-        }.bind(this));
+            .filter(function(trigger) {
+                return this.isNear(trigger.el.getBoundingClientRect(), coords, trigger.distance);
+            }.bind(this));
     }
 });
