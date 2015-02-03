@@ -18,7 +18,10 @@ Loader.prototype = {
                 link.onload = function() {
                     resolve(link);
                 };
-                link.onerror = reject;
+                link.onerror = function(reason) {
+                    console.error('Failed to load resource ' + src);
+                    reject();
+                };
                 head.appendChild(link);
             });
         }

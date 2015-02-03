@@ -1,54 +1,64 @@
 (function() {
     var loader = new DepsTrackingLoader(new DepsStorage(localStorage)),
-        handlers = {};
+        handlers = new WeakMap(); // keeps track of an the handlers for each root
 
-    var proximityHandler = {
-        addTrigger: function(params) {
-            var style = getComputedStyle(params.el);
+    var ProximityHandler = function(loader, root) {
+        this.root = root;
+    };
 
-            if(style.overflow !== 'visible' || style.position === 'static') {
-                if(DEBUG) {
-                    console.warn('Cannot create a simple trigger due to positioning or overflow, falling back to using mousemove.');
-                }
-                getHandler('mousemove-proximity').addTrigger(params);
-            } else {
-                getHandler('node-proximity').addTrigger(params);
+    ProximityHandler.prototype.addTrigger = function(params) {
+        var style = getComputedStyle(params.el);
+
+        if(style.overflow !== 'visible' || style.position === 'static') {
+            if(DEBUG) {
+                console.warn('Cannot create a simple trigger due to positioning or overflow, falling back to using mousemove.');
             }
+            getHandler('mousemove-proximity', this.root).addTrigger(params);
+        } else {
+            getHandler('node-proximity', this.root).addTrigger(params);
         }
     };
 
-    function prepare(params) {
+    function prepare(params, shadowRoot) {
+        var root = shadowRoot || document.body;
+
         params.triggers.forEach(function(trigger) {
-            prepareTrigger(trigger, params);
+            prepareTrigger(trigger, params, root);
         });
     }
 
-    function createHandler(type) {
+    function createHandler(type, root) {
         switch(type) {
             case 'added':
-                return new NodeAddedHandler(loader);
+                return new NodeAddedHandler(loader, root);
             case 'proximity':
-                return proximityHandler;
+                return new ProximityHandler(loader, root);
             case 'node-proximity':
-                return new NodeProximityHandler(loader);
+                return new NodeProximityHandler(loader, root);
             case 'mousemove-proximity':
-                return new MouseMoveProximityHandler(loader);
+                return new MouseMoveProximityHandler(loader, root);
             default:
-                return new DelegatedEventHandler(type, loader);
+                return new DelegatedEventHandler(type, loader, root);
         }
     }
 
-    function getHandler(type) {
-        if(!handlers[type]) {
-            handlers[type] = createHandler(type);
+    function getHandler(type, root) {
+        if(!handlers.get(root)) {
+           handlers.set(root, {});
         }
 
-        return handlers[type];
+        if(!handlers.get(root)[type]) {
+            handlers.get(root)[type] = createHandler(type, root);
+        }
+
+        return handlers.get(root)[type];
     }
 
-    function prepareTrigger(trigger, params) {
-        getHandler(trigger.type).addTrigger({
-            el: Utils.getNode(params.el),
+    function prepareTrigger(trigger, params, root) {
+        var el = params.el;
+
+        getHandler(trigger.type, root).addTrigger({
+            el: typeof el === 'string' ? root.querySelector(el) : el,
             selector: params.selector,
             src: params.src,
             tagName: trigger.tagName,

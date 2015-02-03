@@ -2,6 +2,7 @@
 
 describe('MouseMoveProximityHandler', function() {
     var loader,
+        root,
         mouseMoveProximityHandler;
 
     beforeEach(function() {
@@ -9,7 +10,12 @@ describe('MouseMoveProximityHandler', function() {
             load: sinon.spy()
         };
 
-        mouseMoveProximityHandler = new MouseMoveProximityHandler(loader);
+        root = {
+            addEventListener: sinon.spy(),
+            removeEventListener: sinon.spy()
+        };
+
+        mouseMoveProximityHandler = new MouseMoveProximityHandler(loader, root);
     });
 
     describe('getTrippedTriggers', function() {

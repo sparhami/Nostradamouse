@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <script src="/bower_components/platform/platform.js"></script>
+        <script src="/build/nmouse.js"></script>
+    </head>
+
+    <body>
+        <div id="container"></div>
+
+        <template id="testTemplate">
+            <button>Click</button>
+
+            <nmouse-rule selector="button"
+                         src="trigger-src">
+                <nmouse-trigger type="click"></nmouse-trigger>
+            </nmouse-rule>
+        </template>
+    </body>
+
+    <script>
+        var container = document.getElementById('container'),
+            shadowRoot = container.createShadowRoot(),
+            template = document.querySelector('#testTemplate'),
+            clone = document.importNode(template.content, true);
+
+        shadowRoot.appendChild(clone);
+    </script>
+</html>

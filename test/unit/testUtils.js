@@ -13,35 +13,6 @@ describe('Utils', function() {
         body.removeChild(container);
     });
 
-    describe('getNode', function() {
-        beforeEach(function() {
-            container.innerHTML = '<div><div class="someClass"></div></div>';
-        });
-
-        it('should return the matching node when present', function() {
-            var node = document.querySelector('.someClass');
-
-            expect(Utils.getNode('.someClass')).to.equal(node);
-        });
-
-        it('should null when the matching node is not present', function() {
-            var node = null;
-
-            expect(Utils.getNode('#someId')).to.equal(node);
-        });
-
-        it('should a node when given a node', function() {
-            var node = document.querySelector('.someClass');
-
-            expect(Utils.getNode(node)).to.equal(node);
-        });
-
-
-        it('should throw an error when given an invalid thing in debug mode', function() {
-            expect(Utils.getNode.bind(null, {})).to.throw(Error);
-        });
-    });
-
     describe('getAncestry', function() {
         beforeEach(function() {
             container.innerHTML = '<span class="someClass"></span>';

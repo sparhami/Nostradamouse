@@ -1,6 +1,7 @@
-var DelegatedEventHandler = function(evtName, loader) {
+var DelegatedEventHandler = function(evtName, loader, root) {
     this.evtName = evtName;
     this.loader = loader;
+    this.root = root;
     this.triggers = [];
 };
 
@@ -8,11 +9,16 @@ DelegatedEventHandler.prototype = {
     setupListener: function() {
         var haveTriggers = !!this.triggers.length;
 
-        window[haveTriggers ? 'addEventListener' : 'removeEventListener'](this.evtName, this, true);
+        this.root[haveTriggers ? 'addEventListener' : 'removeEventListener'](this.evtName, this, true);
     },
 
     getTrippedTriggers: function(e) {
         return Utils.getAncestry(e.target)
+            // Ancestry returns Nodes, not Elements so need to
+            // make sure the matches function is present
+            .filter(function(node) {
+                return node.matches;
+            })
             .map(function(node) {
                 return this.triggers.filter(function(trigger) {
                     return node.matches(trigger.selector);

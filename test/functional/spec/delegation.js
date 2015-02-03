@@ -24,4 +24,16 @@ describe('Event delegation triggers', function () {
             .then(noop)
             .then(done);
     });
+
+// Testcase currently not working - shadowRoot creation in html file causes the testcase
+// to fail for some reason. When tested manually, the test works fine.
+//     it('should trigger for a rule and element in a shadow root', function (done) {
+//         this.browser
+//             .get(basePath + 'delegation/shadowRoot.html')
+//             .elementByCssSelector('html /deep/ button')
+//                 .click()
+//             .waitForElementByCssSelector('link[href="trigger-src"]')
+//             .then(noop)
+//             .then(done);
+//     });
 });

@@ -1,5 +1,5 @@
-var MouseMoveProximityHandler = function(loader) {
-    DelegatedEventHandler.call(this, 'mousemove', loader);
+var MouseMoveProximityHandler = function(loader, root) {
+    DelegatedEventHandler.call(this, 'mousemove', loader, root);
 };
 
 Utils.extend(MouseMoveProximityHandler, DelegatedEventHandler, {

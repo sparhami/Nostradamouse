@@ -5,6 +5,7 @@ describe('DelegatedEventHandler', function() {
         sandbox = sinon.sandbox.create(),
         container,
         loader,
+        root,
         delegatedEventHandler;
 
     beforeEach(function() {
@@ -15,10 +16,12 @@ describe('DelegatedEventHandler', function() {
             load: sinon.spy()
         };
 
-        delegatedEventHandler = new DelegatedEventHandler('click', loader);
+        root = {
+            addEventListener: sinon.spy(),
+            removeEventListener: sinon.spy()
+        };
 
-        sandbox.stub(window, 'addEventListener');
-        sandbox.stub(window, 'removeEventListener');
+        delegatedEventHandler = new DelegatedEventHandler('click', loader, root);
     });
 
     afterEach(function() {
@@ -30,8 +33,8 @@ describe('DelegatedEventHandler', function() {
         it('should add a listener if there are triggers', function() {
             delegatedEventHandler.addTrigger({});
 
-            expect(window.addEventListener).to.have.been.calledOnce;
-            expect(window.removeEventListener).to.have.been.notCalled;
+            expect(root.addEventListener).to.have.been.calledOnce;
+            expect(root.removeEventListener).to.have.been.notCalled;
         });
 
         it('should remove the listener if there are no triggers', function() {
@@ -40,8 +43,8 @@ describe('DelegatedEventHandler', function() {
             delegatedEventHandler.triggers = [];
             delegatedEventHandler.setupListener();
 
-            expect(window.addEventListener).to.have.been.calledOnce;
-            expect(window.removeEventListener).to.have.been.calledOnce;
+            expect(root.addEventListener).to.have.been.calledOnce;
+            expect(root.removeEventListener).to.have.been.calledOnce;
         });
     });
 
@@ -59,8 +62,8 @@ describe('DelegatedEventHandler', function() {
         it('should add a listener', function() {
             delegatedEventHandler.addTrigger({});
 
-            expect(window.addEventListener).to.have.been.calledOnce;
-            expect(window.removeEventListener).to.have.been.notCalled;
+            expect(root.addEventListener).to.have.been.calledOnce;
+            expect(root.removeEventListener).to.have.been.notCalled;
         });
     });
 
@@ -160,7 +163,7 @@ describe('DelegatedEventHandler', function() {
             expect(delegatedEventHandler.triggers)
                 .to.contain(triggerOne)
                 .to.not.contain(triggerTwo);
-            expect(window.removeEventListener).to.have.been.notCalled;
+            expect(root.removeEventListener).to.have.been.notCalled;
         });
 
         it('should remove event after all triggers have been tripped', function() {
@@ -171,7 +174,7 @@ describe('DelegatedEventHandler', function() {
             sinon.stub(delegatedEventHandler, 'getTrippedTriggers').returns([triggerOne, triggerTwo]);
             delegatedEventHandler.handleEvent({});
 
-            expect(window.removeEventListener).to.have.been.called;
+            expect(root.removeEventListener).to.have.been.called;
         });
     });
 });

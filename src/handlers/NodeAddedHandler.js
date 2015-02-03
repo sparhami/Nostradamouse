@@ -1,5 +1,6 @@
-var NodeAddedHandler = function(loader) {
+var NodeAddedHandler = function(loader, root) {
     this.loader = loader;
+    this.root = root;
     this.triggers = {};
     this.observer = new MutationObserver(this.observe.bind(this));
 };
