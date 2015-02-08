@@ -36,3 +36,11 @@ document.registerElement('nmouse-rule', {
         }
     })
 });
+
+document.registerElement('nmouse-deps', {
+    prototype: Utils.mix(Object.create(HTMLElement.prototype), {
+        attachedCallback: function() {
+            nmouse.importer.importFromNode(this);
+        }
+    })
+});

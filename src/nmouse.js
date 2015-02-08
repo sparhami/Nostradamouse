@@ -1,5 +1,7 @@
 (function() {
-    var loader = new DepsTrackingLoader(new DepsStorage(localStorage)),
+    var storage = new DepsStorage(localStorage),
+        loader = new DepsTrackingLoader(storage),
+        importer = new DepsImporter(storage),
         handlers = new WeakMap(); // keeps track of an the handlers for each root
 
     var ProximityHandler = function(loader, root) {
@@ -68,6 +70,9 @@
 
     window.nmouse = {
         prepare: prepare,
-        loader: loader
+
+        loader: loader,
+
+        importer: importer
     };
 })();

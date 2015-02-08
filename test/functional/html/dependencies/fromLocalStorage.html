@@ -2,6 +2,11 @@
     <head>
         <script src="/bower_components/platform/platform.js"></script>
         <script src="/build/nmouse.js"></script>
+
+        <script>
+            localStorage.clear();
+            localStorage.setItem('nmouse-trigger-src', JSON.stringify(['trigger-dep-src']));
+        </script>
     </head>
 
     <body>
@@ -11,9 +16,5 @@
                      src="trigger-src">
             <nmouse-trigger type="click"></nmouse-trigger>
         </nmouse-rule>
-
-        <script>
-            localStorage.setItem('nmouse-trigger-src', JSON.stringify(['trigger-dep-src']));
-        </script>
     </body>
 </html>
