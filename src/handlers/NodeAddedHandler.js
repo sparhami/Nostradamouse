@@ -11,7 +11,7 @@ NodeAddedHandler.prototype = {
             observer = this.observer;
 
         if(haveTriggers) {
-            observer.observe(document, { childList: true, subtree: true });
+            observer.observe(this.root, { childList: true, subtree: true });
         } else {
             observer.disconnect();
         }
@@ -40,7 +40,7 @@ NodeAddedHandler.prototype = {
     },
 
     addTrigger: function(params) {
-        if(document.getElementsByTagName(params.tagName).length) {
+        if(this.root.getElementsByTagName(params.tagName).length) {
             this.loader.load(params.src);
         } else {
             // TODO - support one tagName mapping to multiple srcs

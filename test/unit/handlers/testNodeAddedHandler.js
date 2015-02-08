@@ -19,7 +19,7 @@ describe('NodeProximityHandler', function() {
         var nodeAddedHandler;
 
         beforeEach(function() {
-            nodeAddedHandler = new NodeAddedHandler();
+            nodeAddedHandler = new NodeAddedHandler(null, document);
         });
 
         it('should observe the document for changes', function() {
@@ -51,7 +51,7 @@ describe('NodeProximityHandler', function() {
 
         beforeEach(function() {
             loader.load.reset();
-            nodeAddedHandler = new NodeAddedHandler(loader);
+            nodeAddedHandler = new NodeAddedHandler(loader, document);
         });
 
         it('should add a trigger and call setupObserver', function() {
@@ -89,7 +89,7 @@ describe('NodeProximityHandler', function() {
 
         beforeEach(function() {
             loader.load.reset();
-            nodeAddedHandler = new NodeAddedHandler(loader);
+            nodeAddedHandler = new NodeAddedHandler(loader, document);
         });
 
         describe('tripped triggers', function() {
