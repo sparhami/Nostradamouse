@@ -9,7 +9,7 @@ describe('DepsImporter', function() {
             .map(function(dep) {
                 var node = document.createElement('nmouse-dep');
 
-                node.setAttribute('id', dep.id);
+                node.setAttribute('data-id', dep.id);
                 node.setAttribute('src', dep.src);
 
                 if(dep.deps) {

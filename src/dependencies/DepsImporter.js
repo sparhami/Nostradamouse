@@ -8,7 +8,7 @@ DepsImporter.prototype = {
             depsMapping = {};
 
         deps.forEach(function(dep) {
-            depsMapping[dep.getAttribute('id')] = dep;
+            depsMapping[dep.getAttribute('data-id')] = dep;
         });
 
         deps.map(function(dep) {
