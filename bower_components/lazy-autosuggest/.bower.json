@@ -1,6 +1,6 @@
 {
   "name": "lazy-autosuggest",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "authors": [
     "sparhami <sepandparhami@gmail.com>"
   ],
@@ -13,6 +13,9 @@
   "license": "MIT",
   "homepage": "https://github.com/sparhami/lazy-autosuggest",
   "private": false,
+  "main": [
+    "lazy-autosuggest.html"
+  ],
   "ignore": [
     "**/.*",
     "node_modules",
@@ -23,11 +26,11 @@
   "dependencies": {
     "polymer": "latest"
   },
-  "_release": "0.0.5",
+  "_release": "0.0.6",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.5",
-    "commit": "0428a1df5039404f5425f08db75e65f3854c4945"
+    "tag": "0.0.6",
+    "commit": "07468f5b020458206d4f45785b7e49bc528d6e4a"
   },
   "_source": "git://github.com/sparhami/lazy-autosuggest.git",
   "_target": "*",

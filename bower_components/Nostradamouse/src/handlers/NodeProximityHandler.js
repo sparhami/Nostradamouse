@@ -1,5 +1,6 @@
-var NodeProximityHandler = function(loader) {
+var NodeProximityHandler = function(loader, root) {
     this.loader = loader;
+    this.root = root;
 };
 
 NodeProximityHandler.prototype = {

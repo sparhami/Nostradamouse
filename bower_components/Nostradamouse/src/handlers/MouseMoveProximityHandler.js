@@ -1,5 +1,5 @@
-var MouseMoveProximityHandler = function(loader) {
-    DelegatedEventHandler.call(this, 'mousemove', loader);
+var MouseMoveProximityHandler = function(loader, root) {
+    DelegatedEventHandler.call(this, 'mousemove', loader, root);
 };
 
 Utils.extend(MouseMoveProximityHandler, DelegatedEventHandler, {
@@ -19,8 +19,8 @@ Utils.extend(MouseMoveProximityHandler, DelegatedEventHandler, {
             };
 
         return this.triggers
-        .filter(function(trigger) {
-            return this.isNear(trigger.el.getBoundingClientRect(), coords, trigger.distance);
-        }.bind(this));
+            .filter(function(trigger) {
+                return this.isNear(trigger.el.getBoundingClientRect(), coords, trigger.distance);
+            }.bind(this));
     }
 });

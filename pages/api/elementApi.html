@@ -3,6 +3,100 @@
         <title>Element API</title>
     </head>
     <div>
-        // TODO
+        <article>
+            <h2>nmouse-rule</h2>
+            <div class="section-with-aside group">
+                <section>
+                    <h3>Description</h3>
+                    <p>Consists of one or more <em>&lt;nmouse-trigger&gt;</em> elements that dictate when an import should be loaded</p>
+                </section>
+                <aside class="note">A rule should be placed in the same <a href="https://www.polymer-project.org/platform/shadow-dom.html">shadow root</a> as any elements it will act on</aside>
+            </div>
+
+            <section>
+                <h3>Attributes</h3>
+                <ul class="attrList">
+                    <li><span class="attrName">src</span> The path to load</li>
+                    <li><span class="attrName">selector</span> A CSS selector, used with event-type triggers</li>
+                    <li><span class="attrName">el</span> A CSS selector, used with proximity-type triggers</li>
+                </ul>
+            </section>
+        </article>
+        <article>
+            <h2>nmouse-trigger</h2>
+            <section>
+                <h3>Description</h3>
+                <p>Defines a trigger to load a rule on. There are currently 3 types of triggers:
+                    <ul>
+                        <li>Event-based: uses event delegation and a selector to determine if an event on some element should trigger the rule</li>
+                        <li>Proximity-based: based on distance from the cursor to a given element</li>
+                        <li>Element added: triggers when an element of a specified tag name is added to the document</li>
+                    </ul>
+                </p>
+            </section>
+
+            <section>
+                <h3>Attributes</h3>
+                <ul class="attrList">
+                    <li><span class="attrName">type</span> One of 'added', 'proximity' or an event name (e.g. 'click')</li>
+                    <li><span class="attrName">tagName</span> A tag name (e.g. x-my-component), used with type="added"</li>
+                    <li><span class="attrName">distance</span> A distance, in pixels, used with type="proximity"</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Example</h3>
+<prism-js theme="okaidia"
+          language="markup"
+          unresolved>&lt;nmouse-rule src="components/x-foo/x-foo.html"
+             el="#some-element"&gt;
+    &lt;nmouse-trigger type="proximity"
+                    distance="100"&gt;
+    &lt;/nmouse-trigger&gt;
+&lt;/nmouse-rule&gt;
+
+&lt;nmouse-rule src="components/x-bar/x-bar.html"
+             selector=".some-class"&gt;
+    &lt;nmouse-trigger type="mouseenter"&gt;&lt;/nmouse-trigger&gt;
+    &lt;nmouse-trigger type="focus"&gt;&lt;/nmouse-trigger&gt;
+&lt;/nmouse-rule&gt;
+
+&lt;nmouse-rule src="components/x-baz/x-baz.html"&gt;
+    &lt;nmouse-trigger type="added" tagName="x-baz"&gt;&lt;/nmouse-trigger&gt;
+&lt;/nmouse-rule&gt;
+</prism-js>
+            </section>
+        </article>
+        <article>
+            <h2>nmouse-deps</h2>
+            <section>
+                <h3>Description</h3>
+                <p>
+                    Used to load dependency information upfront. Typically, you will want to generate the dependency information and bundle it into the initial payload using something like <a href="https://github.com/polymer/vulcanize">Vulcanize</a>.
+                </p>
+                <p>
+                    See: <a href="https://github.com/sparhami/NostradamouseDeps">NostradamouseDeps</a> for generating the necessary dependency information
+                </p>
+            </section>
+            <section>
+                <h3>Example</h3>
+<prism-js theme="okaidia"
+          language="markup"
+          unresolved>&lt;nmouse-deps&gt;
+    &lt;nmouse-dep data-id="0"
+                src="components/x-foo/x-foo.html"
+                deps="1 2"&gt;
+    &lt;/nmouse-dep&gt;
+    &lt;nmouse-dep data-id="1"
+                src="components/x-bar/x-bar.html"
+                deps="2"&gt;
+    &lt;/nmouse-dep&gt;
+    &lt;nmouse-dep data-id="2"
+                src="components/x-baz/x-baz.html"&gt;
+    &lt;/nmouse-dep&gt;
+&lt;/nmouse-deps&gt;
+</prism-js>
+            </section>
+        </article>
     </div>
 </html>

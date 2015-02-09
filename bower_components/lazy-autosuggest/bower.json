@@ -1,6 +1,6 @@
 {
   "name": "lazy-autosuggest",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "authors": [
     "sparhami <sepandparhami@gmail.com>"
   ],
@@ -9,6 +9,9 @@
   "license": "MIT",
   "homepage": "https://github.com/sparhami/lazy-autosuggest",
   "private": false,
+  "main": [
+    "lazy-autosuggest.html"
+  ],
   "ignore": [
     "**/.*",
     "node_modules",

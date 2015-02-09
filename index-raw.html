@@ -2,105 +2,19 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <script src="bower_components/platform/platform.js"></script>
-        <link rel="import"
-              href="bower_components/polymer/polymer.html">
-
-<!--         <link rel="import"
-              href="bower_components/prism-js/prism-js.html"> -->
-
-        <script src="bower_components/Nostradamouse/dist/nmouse.js"
-                defer>
-        </script>
+        <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+        <script src="bower_components/Nostradamouse/dist/nmouse.js"></script>
 
         <link rel="import"
-              href="bower_components/core-scaffold/core-scaffold.html">
-        <link rel="import"
-              href="bower_components/core-header-panel/core-header-panel.html">
-        <link rel="import"
-              href="bower_components/core-item/core-item.html">
-        <link rel="import"
-              href="bower_components/core-menu/core-menu.html">
-        <link rel="import"
-              href="bower_components/core-menu/core-submenu.html">
-        <link rel="import"
-              href="bower_components/paper-button/paper-button.html">
-
-        <link rel="import"
-              href="components/app-content.html">
-        <link rel="import"
-              href="components/app-menu.html"
-              async>
-        <link rel="import"
-              href="components/img-launcher.html"
-              async>
-
-        <link rel="stylesheet"
-              href="css/style.css">
+              href="./deps.html">
     </head>
 
     <body>
-        <template is="auto-binding">
-            <core-scaffold>
-                <core-header-panel navigation flex mode="seamed">
-                    <core-toolbar>Nostradamouse</core-toolbar>
-                    <app-menu>
-                        <core-menu>
-                            <core-submenu label="About">
-                                <core-item label="Motivation">
-                                    <a href="#about/motivation.html"></a>
-                                </core-item>
-                                <core-item label="Getting Started">
-                                    <a href="#about/gettingStarted.html"></a>
-                                </core-item>
-                                <core-item label="Why lazy loading?">
-                                    <a href="#about/lazyLoading.html"></a>
-                                </core-item>
-                                <core-item label="Dependencies and Bundling"
-                                           selected>
-                                    <a href="#about/dependenciesAndBundling.html"></a>
-                                </core-item>
-                            </core-submenu>
-                            <core-submenu label="API">
-                                <core-item label="Element API">
-                                    <a href="#api/elementApi.html"></a>
-                                </core-item>
-                                <core-item label="JavaScript API">
-                                    <a href="#api/javaScriptApi.html"></a>
-                                </core-item>
-                            </core-submenu>
-                            <core-item label="Demos">
-                                <a href="#demos.html"></a>
-                            </core-item>
-                            <core-submenu label="Advanced">
-                                <core-item label="Customizing Load">
-                                    <a href="#advanced/loadHook.html"></a>
-                                </core-item>
-                            </core-submenu>
-                        </core-menu>
-                    </app-menu>
-                </core-header-panel>
-                <div tool><h1 class="app-content-title">{{pageTitle}}</h1></div>
-
-                <app-content pageTitle="{{pageTitle}}"
-                             baseUrl="pages">
-                </app-content>
-            </core-scaffold>
-        </template>
-
-        <!-- nmouse rules -->
-        <nmouse-rule src="bower_components/prism-js/prism-js.html">
-            <nmouse-trigger type="added" tagName="prism-js">
-            </nmouse-trigger>
-        </nmouse-rule>
-<!--         <nmouse-rule src="bower_components/paper-button/paper-button.html">
-            <nmouse-trigger type="added" tagName="paper-button">
-            </nmouse-trigger>
-        </nmouse-rule> -->
-        <!-- end nmouse rules -->
+        <app-shell></app-shell>
 
         <script>
             window.location.hash = window.location.hash || '#about/motivation.html';
+            nmouse.loader.load('components/app-shell.html');
         </script>
     </body>
 </html>

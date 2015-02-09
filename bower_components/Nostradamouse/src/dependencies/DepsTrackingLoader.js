@@ -1,12 +1,12 @@
 var DepsTrackingLoader = function(depsStorage) {
     this.loader = new Loader();
+    this.originRegExp = new RegExp('^' + location.origin);
     this.depsStorage = depsStorage;
 };
 
 DepsTrackingLoader.prototype = {
     load: function(src) {
-        var _this = this,
-            loader = this.loader,
+        var loader = this.loader,
             promise;
 
         if(loader.get(src)) {
@@ -15,10 +15,10 @@ DepsTrackingLoader.prototype = {
 
         promise = loader.load(src)
             .then(function(link) {
-                _this.updateDeps(src, link.import);
+                this.updateDeps(src, link.import);
 
                 return link;
-            });
+            }.bind(this));
 
         // Load deps afterwards so loading is blocked by max number of network
         // connections being used to load deps for non-SPDY / HTTP/2 case
@@ -27,11 +27,15 @@ DepsTrackingLoader.prototype = {
         return promise;
     },
 
+    getNormalizedHref: function(href) {
+        return href.replace(this.originRegExp, '');
+    },
+
     updateDeps: function(src, doc) {
         var links = [].slice.call(doc.querySelectorAll('link[rel="import"]')),
             deps = links.map(function(link) {
-                return link.href;
-            });
+                return this.getNormalizedHref(link.href);
+            }.bind(this));
 
         this.depsStorage.setDeps(src, deps);
         /*

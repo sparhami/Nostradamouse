@@ -10,7 +10,10 @@ section {
     min-width: 25em;
 }
 
-article,
+article {
+    margin: 2em 1em;
+}
+
 section,
 aside {
     margin: 1em;
@@ -49,9 +52,9 @@ prism-js {
     line-height: 1.3;
 }
 
-h2 {
-    margin-top: 0;
-    margin-bottom: 1em;
+h2,
+h3 {
+    margin: 0 0 1em 0;
 }
 
 .note,
@@ -86,4 +89,25 @@ paper-button {
 
 core-item a {
     outline: none;
+}
+
+.functionDefinition {
+    background-color: #f9f9f9;
+
+    border: 1px solid #333;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.attrList {
+    list-style: none;
+    padding-left: 1em;
+}
+
+.attrName {
+    font-weight: bold;
+}
+
+.attrName::after {
+    content: " – ";
 }

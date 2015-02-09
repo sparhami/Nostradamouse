@@ -1,6 +1,6 @@
 {
     "name": "lazy-autosuggest",
-    "version": "0.0.1",
+    "version": "0.0.6",
     "description": "A Polymer element for showing suggestions based on a user's input",
     "author": "Sepand Parhami",
     "license": "MIT",

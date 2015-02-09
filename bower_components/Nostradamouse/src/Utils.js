@@ -21,20 +21,8 @@ var Utils = (function() {
             child.prototype.constructor = child;
         },
 
-        getNode: function(thing) {
-            if(typeof thing === 'string') {
-                return document.querySelector(thing);
-            } else if(thing instanceof HTMLElement) {
-                return thing;
-            }
-
-            if(DEBUG) {
-                throw Error('invalid thing specified');
-            }
-        },
-
         getAncestry: function _utilsGetAncestry(node) {
-            return node ? [node].concat(_utilsGetAncestry(node.parentElement)) : [];
+            return node ? [node].concat(_utilsGetAncestry(node.parentNode)) : [];
         },
 
         getDescendants: function _utilsGetDescendants(node) {

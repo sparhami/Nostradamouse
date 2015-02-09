@@ -37,29 +37,30 @@ or, if you would prefer to do it in CSS, just give `html`, `body`, and `core-scr
     }
 
 `core-scroll-header-panel` works well with `core-toolbar` but can use any element 
-that represents a header by adding a `core-header` class to it.  Use the attribute 
-or class `content` to delineate the content section.
+that represents a header by adding a `core-header` class to it.
 
     <core-scroll-header-panel>
       <core-toolbar>Header</core-toolbar>
-      <div content>Content goes here...</div>
+      <div>Content goes here...</div>
     </core-scroll-header-panel>
 
 @group Polymer Core Elements
 @element core-scroll-header-panel
+@mixins Polymer.CoreResizable https://github.com/polymer/core-resizable
 @homepage github.io
 -->
 
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../core-resizable/core-resizable.html">
 
 <polymer-element name="core-scroll-header-panel">
 <template>
 
   <link rel="stylesheet" href="core-scroll-header-panel.css">
 
-  <div id="mainContainer" on-scroll="{{scroll}}">
+  <div id="mainContainer">
   
-    <content id="mainContent" select="[content], .content"></content>
+    <content id="mainContent" select=":not(core-toolbar):not(.core-header)"></content>
     
   </div>
   
@@ -76,8 +77,9 @@ or class `content` to delineate the content section.
   
 </template>
 <script>
+(function() {
 
-  Polymer('core-scroll-header-panel', {
+  Polymer(Polymer.mixin({
     
     /**
      * Fired when the content has been scrolled.
@@ -147,6 +149,7 @@ or class `content` to delineate the content section.
        *
        * @attribute headerHeight
        * @type number
+       * @default 0
        */
       headerHeight: 0,
 
@@ -158,6 +161,7 @@ or class `content` to delineate the content section.
        *
        * @attribute condensedHeaderHeight
        * @type number
+       * @default 0
        */
       condensedHeaderHeight: 0,
       
@@ -182,6 +186,24 @@ or class `content` to delineate the content section.
     observe: {
       'headerMargin fixed': 'setup'
     },
+
+    eventDelegates: {
+      'core-resize': 'measureHeaderHeight'
+    },
+
+    attached: function() {
+      this.resizableAttachedHandler();
+    },
+
+    ready: function() {
+      this._scrollHandler = this.scroll.bind(this);
+      this.scroller.addEventListener('scroll', this._scrollHandler);
+    },
+    
+    detached: function() {
+      this.scroller.removeEventListener('scroll', this._scrollHandler);
+      this.resizableDetachedHandler();
+    },
     
     domReady: function() {
       this.async('measureHeaderHeight');
@@ -191,13 +213,25 @@ or class `content` to delineate the content section.
       return this.$.headerContent.getDistributedNodes()[0];
     },
     
+    /**
+     * Returns the scrollable element.
+     *
+     * @property scroller
+     * @type Object
+     */
     get scroller() {
       return this.$.mainContainer;
     },
     
+    /**
+     * Invoke this to tell `core-scroll-header-panel` to re-measure the header's
+     * height.
+     *
+     * @method measureHeaderHeight
+     */
     measureHeaderHeight: function() {
       var header = this.header;
-      if (this.header) {
+      if (header && header.offsetHeight) {
         this.headerHeight = header.offsetHeight;
       }
     },
@@ -276,8 +310,8 @@ or class `content` to delineate the content section.
     },
     
     translateY: function(s, y) {
-      s.transform = s.webkitTransform = y == null ? '' : 
-          'translate3d(0, ' + y + 'px, 0)';
+      var t = y == null ? '' : 'translate3d(0, ' + y + 'px, 0)';
+      setTransform(s, t);
     },
     
     scroll: function(event) {
@@ -296,7 +330,7 @@ or class `content` to delineate the content section.
       }
       
       if (!event || !this.fixed && y !== this.y) {
-        requestAnimationFrame(this.transformHeader.bind(this, y));
+        this.transformHeader(y);
       }
       
       this.prevScrollTop = Math.max(sTop, 0);
@@ -307,7 +341,20 @@ or class `content` to delineate the content section.
       }
     }
 
-  });
+  }, Polymer.CoreResizable));
+  
+  //determine proper transform mechanizm
+  if (document.documentElement.style.transform !== undefined) {
+    var setTransform = function(style, string) {
+      style.transform = string;
+    }
+  } else {
+    var setTransform = function(style, string) {
+      style.webkitTransform = string;
+    }
+  }
+
+})();
 
 </script>
 </polymer-element>

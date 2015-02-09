@@ -11,7 +11,8 @@ body {
     float: right;
 }
 
-x-stateautosuggest input {
+x-stateautosuggest input,
+x-stateautosuggest::shadow .inputHint {
     width: 600px;
     max-width: 50%;
 
@@ -19,8 +20,13 @@ x-stateautosuggest input {
 }
 
 x-stateautosuggest input,
+x-stateautosuggest::shadow .inputHint,
 x-stateautosuggest::shadow .dropdown {
     border: 1px solid #aaa;
+}
+
+x-stateautosuggest::shadow .dropdown {
+    background-color: white;   
 }
 
 x-stateautosuggest::shadow .selected {

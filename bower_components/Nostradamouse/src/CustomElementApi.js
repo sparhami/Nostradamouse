@@ -14,26 +14,33 @@
  *  </nmouse-rule>
  * </code>
  */
-(function() {
-    document.registerElement('nmouse-rule', {
-        prototype: Utils.mix(Object.create(HTMLElement.prototype), {
-            attachedCallback: function() {
-                var triggers = [].slice.call(this.querySelectorAll('nmouse-trigger'))
+document.registerElement('nmouse-rule', {
+    prototype: Utils.mix(Object.create(HTMLElement.prototype), {
+        attachedCallback: function() {
+            var triggers = [].slice.call(this.querySelectorAll('nmouse-trigger'))
                     .map(function(node) {
                         return {
                             type: node.getAttribute('type'),
                             tagName: node.getAttribute('tagName'),
                             distance: node.getAttribute('distance')
                         };
-                    });
+                    }),
+                ancestry = Utils.getAncestry(this);
 
-                nmouse.prepare({
-                    el: this.getAttribute('el'),
-                    selector: this.getAttribute('selector'),
-                    src: this.getAttribute('src'),
-                    triggers: triggers
-                });
-            }
-        })
-    });
-})();
+            nmouse.prepare({
+                el: this.getAttribute('el'),
+                selector: this.getAttribute('selector'),
+                src: this.getAttribute('src'),
+                triggers: triggers
+            }, ancestry[ancestry.length - 1]);
+        }
+    })
+});
+
+document.registerElement('nmouse-deps', {
+    prototype: Utils.mix(Object.create(HTMLElement.prototype), {
+        attachedCallback: function() {
+            nmouse.importer.importFromNode(this);
+        }
+    })
+});
