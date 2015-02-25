@@ -1,6 +1,6 @@
 {
   "name": "Nostradamouse",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "authors": [
     "sparhami <sepandparhami@gmail.com>"
   ],
@@ -22,11 +22,11 @@
     "platform": "Polymer/platform#latest"
   },
   "homepage": "https://github.com/sparhami/Nostradamouse",
-  "_release": "0.1.7",
+  "_release": "0.1.8",
   "_resolution": {
     "type": "version",
-    "tag": "0.1.7",
-    "commit": "46e110b8fe1ffea69d5ce0bdc57119f0163edf1d"
+    "tag": "0.1.8",
+    "commit": "4a2e389c7e25818f3557678154025095243194e0"
   },
   "_source": "git://github.com/sparhami/Nostradamouse.git",
   "_target": "*",

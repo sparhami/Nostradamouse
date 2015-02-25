@@ -16,10 +16,19 @@ module.exports = function(grunt) {
                     'index.html': 'index-raw.html'
                 },
             },
+        },
+
+        nmouse_deps: {
+            options: {
+                basePath: '.',
+                outputPath: './deps.html'
+            },
+            files: 'components/**/*.html'
         }
     });
 
     grunt.loadNpmTasks('grunt-vulcanize');
+    grunt.loadNpmTasks('grunt-nmouse-deps');
 
-    grunt.registerTask('default', ['vulcanize']);
+    grunt.registerTask('default', ['nmouse_deps', 'vulcanize']);
 };
