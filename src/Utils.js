@@ -25,12 +25,8 @@ var Utils = (function() {
             return node ? [node].concat(_utilsGetAncestry(node.parentNode)) : [];
         },
 
-        getDescendants: function _utilsGetDescendants(node) {
-            var children = slice.call(node.children || []);
-
-            return Utils
-                .flatMap(children, _utilsGetDescendants)
-                .concat(node);
+        getDescendants: function(node) {
+            return slice.call(node.querySelectorAll('*'));
         }
     };
 })();

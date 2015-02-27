@@ -26,6 +26,7 @@ NodeAddedHandler.prototype = {
 
             Utils
                 .flatMap(addedNodes, Utils.getDescendants)
+                .concat(addedNodes)
                 .forEach(function(node) {
                     var trigger = triggers[node.tagName];
 

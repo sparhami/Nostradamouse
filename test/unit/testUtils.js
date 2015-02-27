@@ -124,14 +124,14 @@ describe('Utils', function() {
                 a = root.querySelector('a'),
                 i = root.querySelector('i');
 
-
             expect(descendants)
                 .to.include(a)
                 .to.include(b)
                 .to.include(i)
                 .to.include(em)
                 .to.include(span)
-                .to.include(root);
+                .to.include(strong)
+                .to.not.include(root);
 
         });
 

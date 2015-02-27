@@ -94,6 +94,12 @@ describe('NodeProximityHandler', function() {
 
         describe('tripped triggers', function() {
             beforeEach(function() {
+                var node_0 = document.createElement('x-bar'),
+                    node_1 = document.createElement('div'),
+                    node_1_0 = document.createElement('x-foo');
+
+                node_1.appendChild(node_1_0);
+
                 nodeAddedHandler.triggers['X-FOO'] = {
                     tagName: 'x-foo',
                     src: 'srcOne'
@@ -108,15 +114,8 @@ describe('NodeProximityHandler', function() {
                 nodeAddedHandler.observe([
                     {
                         addedNodes: [
-                            {
-                                tagName: 'X-BAR'
-                            },
-                            {
-                                tagName: 'DIV',
-                                children: [{
-                                    tagName: 'X-FOO'
-                                }]
-                            }
+                            node_0,
+                            node_1
                         ]
                     }
                 ]);
