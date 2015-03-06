@@ -18,7 +18,7 @@ describe('CustomElementAPi', function() {
     });
 
     describe('nmouse-rule', function() {
-        it('should call prepare with the triggers', function(done) {
+        it('should call prepare with the triggers', function() {
             container.innerHTML = '' +
                 '<nmouse-rule src="src" el="#someId">' +
                 '<nmouse-trigger type="focus"></nmouse-trigger>' +
@@ -26,7 +26,7 @@ describe('CustomElementAPi', function() {
                 '</nmouse-rule>';
 
             // NOTE: This needs to be async when using platform.js with Firefox
-            Promise.resolve()
+            return Promise.resolve()
                 .then(function() {
                     expect(nmouse.prepare)
                         .to.have.been.calledOnce
@@ -47,17 +47,16 @@ describe('CustomElementAPi', function() {
                                 }
                             ]
                         });
-                })
-                .then(done, done);
+                });
         });
 
-        it('should call prepare for each rule', function(done) {
+        it('should call prepare for each rule', function() {
             container.innerHTML = '' +
                 '<nmouse-rule src="src" el="#someId"></nmouse-rule>' +
                 '<nmouse-rule src="src2" el="#someId2"></nmouse-rule>';
 
             // NOTE: This needs to be async when using platform.js with Firefox
-            Promise.resolve()
+            return Promise.resolve()
                 .then(function() {
                     expect(nmouse.prepare).to.have.been
                         .calledTwice
@@ -73,8 +72,7 @@ describe('CustomElementAPi', function() {
                             selector: null,
                             triggers: []
                         });
-                })
-                .then(done, done);
+                });
         });
     });
 });

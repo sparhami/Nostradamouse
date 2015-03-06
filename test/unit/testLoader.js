@@ -1,22 +1,21 @@
 /*jshint expr: true*/
 
 describe('Loader', function() {
-    var loader,
+    var sandbox = sinon.sandbox.create(),
+        loader,
         head = document.querySelector('head'),
         headAppendChild = head.appendChild;
 
     beforeEach(function() {
         loader = new Loader();
 
-        head.appendChild = function(node) {
+        sandbox.stub(head, 'appendChild', function(node) {
             node.onload();
-        };
-
-        sinon.spy(head, 'appendChild');
+        });
     });
 
     afterEach(function() {
-        head.appendChild = headAppendChild;
+        sandbox.restore();
     });
 
     describe('load', function() {
@@ -32,24 +31,22 @@ describe('Loader', function() {
                 });
         });
 
-        it('should load multiple sources', function(done) {
-
-
+        it('should load multiple sources', function() {
             loader.load('some/src');
-            loader.load('some/other/src')
+
+            return loader.load('some/other/src')
                 .then(function() {
                     expect(head.appendChild).to.have.been.calledTwice;
-                })
-                .then(done, done);
+                });
         });
 
-        it('should not load the same source twice', function(done) {
+        it('should not load the same source twice', function() {
             loader.load('some/src');
-            loader.load('some/src')
+
+            return loader.load('some/src')
                 .then(function() {
                     expect(head.appendChild).to.have.been.calledOnce;
-                })
-                .then(done, done);
+                });
         });
     });
 });

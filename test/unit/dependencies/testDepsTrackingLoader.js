@@ -106,7 +106,7 @@ describe('DepsTrackingLoader', function() {
             expect(Loader.prototype.load).to.not.have.been.called;
         });
 
-        it('should return a promise that resolves loading', function(done) {
+        it('should return a promise that resolves loading', function() {
             var depsStorage = {
                     getDeps: sinon.stub().returns([])
                 },
@@ -119,12 +119,12 @@ describe('DepsTrackingLoader', function() {
             );
 
             depsTrackingLoader.updateDeps = sinon.stub();
-            depsTrackingLoader.load('src')
-                .then(function() {})
-                .then(done, done);
+
+            return depsTrackingLoader.load('src')
+                .then(function() {});
         });
 
-        it('should call updateDeps after loading', function(done) {
+        it('should call updateDeps after loading', function() {
             var depsStorage = {
                     getDeps: sinon.stub().returns([])
                 },
@@ -139,11 +139,11 @@ describe('DepsTrackingLoader', function() {
             );
 
             depsTrackingLoader.updateDeps = sinon.stub();
-            depsTrackingLoader.load('src')
+
+            return depsTrackingLoader.load('src')
                 .then(function() {
                     expect(depsTrackingLoader.updateDeps).to.have.been.calledWith('src', doc);
-                })
-                .then(done, done);
+                });
         });
 
         it('should load all the deps for a given src', function() {
