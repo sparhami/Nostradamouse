@@ -62,25 +62,25 @@
 
 
             <section>
-                <h2>SPDY to the rescue</h2>
+                <h2>HTTP/2 to the rescue</h2>
                 <p>
-                    If you can use SPDY (<a href="http://caniuse.com/#feat=spdy">browsers supporting SPDY</a>), then the limited number of simultaneous connections should not be a problem. The figures below show the effect that using SPDY has. If we know our dependencies up front, we gain the advantage of bundling (fewer round trips), while still being able to retain files in cache and loading only the components we need.
+                    If you can use HTTP/2 (<a href="http://caniuse.com/#search=http%2F2">browsers supporting HTTP/2</a>), then the limited number of simultaneous connections should not be a problem. The figures below show the effect that using HTTP/2 has. If we know our dependencies up front, we gain the advantage of bundling (fewer round trips), while still being able to retain files in cache and loading only the components we need.
                 </p>
 
                 <div class="group">
                     <figure class="network-img">
-                        <img-launcher class="network-img" src="img/spdy-deps-unknown.png" title="SPDY with unknown dependencies"></img-launcher>
-                        <figcaption>Downloading a component via SPDY, 100ms latency - click to expand</figcaption>
+                        <img-launcher class="network-img" src="img/http2-deps-unknown.png" title="HTTP/2 with unknown dependencies"></img-launcher>
+                        <figcaption>Downloading a component via HTTP/2, 100ms latency - click to expand</figcaption>
                     </figure>
 
                     <figure class="network-img">
-                        <img-launcher class="network-img" src="img/spdy-deps-known.png" title="SPDY with known dependencies"></img-launcher>
-                        <figcaption>Downloading a component via SPDY, all dependencies requested up front, 100ms latency - click to expand</figcaption>
+                        <img-launcher class="network-img" src="img/http2-deps-known.png" title="HTTP/2 with known dependencies"></img-launcher>
+                        <figcaption>Downloading a component via HTTP/2, all dependencies requested up front, 100ms latency - click to expand</figcaption>
                     </figure>
                 </div>
 
                 <p>
-                    When the dependencies are not known, SPDY does not provide much help in this case. While we are able to download more than 6 component definitions at once, we are still limited by the number of roundtrips required. However, when we know what the dependencies are, it looks much better. Note that the last trip is needed to download the stylesheets and scripts references in the components themselves. This can be avoided by inlining the required scripts and stylesheets either manually or as part of a build process.
+                    When the dependencies are not known, HTTP/2 does not provide much help in this case. While we are able to download more than 6 component definitions at once, we are still limited by the number of roundtrips required. However, when we know what the dependencies are, it looks much better. Note that the last trip is needed to download the stylesheets and scripts references in the components themselves. This can be avoided by inlining the required scripts and stylesheets either manually or as part of a build process.
                 </p>
             </section>
         </article>
