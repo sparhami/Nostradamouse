@@ -17,7 +17,7 @@ describe('Event delegation triggers', function () {
             .elementById('button')
                 .click()
             .elementByCssSelector('link[href="trigger-src"]');
-;    });
+    });
 
 // Testcase currently not working - shadowRoot creation in html file causes the testcase
 // to fail for some reason. When tested manually, the test works fine.
