@@ -13,23 +13,19 @@
                 display: none;
             }
         </style>
-        <img class="normal-img"
-             src="{{src}}"
-             title="{{title}}"
-             on-tap="{{expand}}">
+        <content class="normal-img" on-tap="{{expand}}"></content>
 
         <paper-dialog opened="{{expanded}}"
                       backdrop="true">
             <img class="expanded-img"
-                 src="{{src}}"
-                 title="{{title}}">
+                 src="{{src}}">
         </paper-dialog>
     </template>
     <script>
         Polymer({
             src: '',
             title: '',
-            
+
             expand: function() {
                 this.expanded = true;
             }
