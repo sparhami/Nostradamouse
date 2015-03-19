@@ -13,7 +13,8 @@ module.exports = function(grunt) {
                     strip: true
                 },
                 files: {
-                    'index.html': 'index-raw.html'
+                    'index.html': 'index-raw.html',
+                    'nofills.html': 'nofills-raw.html'
                 },
             },
         },
